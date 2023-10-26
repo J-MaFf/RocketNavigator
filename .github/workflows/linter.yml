@@ -39,13 +39,14 @@ jobs:
       - uses: psf/black@stable
         with:
           options:
+
       - name: Set up git 
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+
       - name: Commit files
         run: |
-          
           git add -u
           git diff --cached --quiet || git commit -m "Apply Black formatting"
           git push
@@ -61,8 +62,8 @@ jobs:
     # Grant status permission for MULTI_STATUS #
     ############################################
     permissions:
-      contents: read
-      packages: read
+      contents: write
+      packages: write
       statuses: write
 
     ##################
@@ -85,7 +86,7 @@ jobs:
       - name: Lint Code Base
         uses: super-linter/super-linter@v5
         env:
-          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: true
           # Change to 'master' if your main branch differs
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
