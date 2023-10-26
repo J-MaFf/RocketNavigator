@@ -6,6 +6,9 @@
 #################################
 name: Lint Code Base
 
+
+
+
 #
 # Documentation:
 # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
@@ -20,12 +23,17 @@ on:
 ###############
 # Set the Job #
 ###############
+
+
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: psf/black@stable
+        with:
+          args: "."
 
 
   build:
