@@ -1,0 +1,10 @@
+[tool.black]
+    line-length = 79
+    target-version = ['py38']
+    ```
+    
+    This sets the maximum line length to 79 characters and specifies that Black should target Python 3.8 syntax.
+    
+3. Save the file.
+
+Now, whenever you run Black on your project, it will use the settings specified in the `pyproject.toml` file. To run Black on your files, you can use the following command:
