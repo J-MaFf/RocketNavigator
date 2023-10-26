@@ -1,5 +1,4 @@
 name: Super-Linter
-uses: super-linter/super-linter@v5.4.3
 
 on: push
 
@@ -16,4 +15,3 @@ jobs:
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
