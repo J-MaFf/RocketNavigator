@@ -1,8 +1,6 @@
 """ 
 Mock RPi.GPIO Library
 
-GitHub Copilot: Sure, here's some documentation for the `mock.py` module:
-
 ## `mock.py` module
 
 The `mock.py` module provides a mock implementation of the `RPi.GPIO` module for testing and development purposes. It allows you to test your code that uses the `RPi.GPIO` module without actually running it on a Raspberry Pi.
