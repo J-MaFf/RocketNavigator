@@ -48,7 +48,7 @@ jobs:
       - name: Commit files
         run: |
           git add -u
-          git diff --cached || git commit -m "Apply Black formatting"
+          git diff --cached --quiet || git commit -m "Apply Black formatting"
           git push
 
   build:
