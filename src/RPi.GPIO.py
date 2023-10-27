@@ -18,17 +18,21 @@ _pin_setup = {}
 _pin_values = {}
 _event_callbacks = {}
 
+
 # Methods
 def setwarnings(flag):
     print(f"Set warnings: {flag}")
 
+
 def setmode(mode):
     print(f"Setting mode: {mode}")
+
 
 def setup(pin, mode, pull_up_down=None, initial=None):
     print(f"Setting up pin {pin} with mode {mode}")
     _pin_setup[pin] = mode
     _pin_values[pin] = initial
+
 
 def output(pin, value):
     if _pin_setup.get(pin) != OUT:
@@ -36,11 +40,13 @@ def output(pin, value):
     print(f"Setting output for pin {pin} to {value}")
     _pin_values[pin] = value
 
+
 def input(pin):
     if _pin_setup.get(pin) != IN:
         raise RuntimeError("The GPIO channel has not been set up as an INPUT")
     print(f"Reading from pin {pin}")
     return _pin_values.get(pin, LOW)
+
 
 def cleanup(pin=None):
     if pin:
@@ -52,14 +58,17 @@ def cleanup(pin=None):
         _pin_setup.clear()
         _pin_values.clear()
 
+
 def add_event_detect(pin, edge, callback=None, bouncetime=None):
     if callback:
         print(f"Adding event detect for pin {pin} on edge {edge} with callback")
         _event_callbacks[pin] = callback
 
+
 def remove_event_detect(pin):
     print(f"Removing event detect for pin {pin}")
     _event_callbacks.pop(pin, None)
+
 
 # PWM class for mocking PWM functions
 class PWM:
