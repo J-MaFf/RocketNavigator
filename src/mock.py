@@ -1,4 +1,4 @@
-''' 
+""" 
 Mock RPi.GPIO Library
 
 GitHub Copilot: Sure, here's some documentation for the `mock.py` module:
@@ -39,7 +39,7 @@ The following methods are defined in the `mock.py` module:
 - `cleanup(pin=None)`: Cleans up the specified GPIO pin or all pins.
 - `add_event_detect(pin, edge, callback=None, bouncetime=None)`: Adds an event detection callback for a GPIO pin on the specified edge.
 
-'''
+"""
 
 # Constants
 BCM = "BCM"
@@ -59,6 +59,7 @@ _pin_setup = {}
 _pin_values = {}
 _event_callbacks = {}
 
+
 # Methods
 def setwarnings(flag):
     """
@@ -72,6 +73,7 @@ def setwarnings(flag):
     """
     print(f"Set warnings: {flag}")
 
+
 def setmode(mode):
     """
     Sets the mode of the rocket navigator.
@@ -83,6 +85,7 @@ def setmode(mode):
         None
     """
     print(f"Setting mode: {mode}")
+
 
 def setup(pin, mode, pull_up_down=None, initial=None):
     """
@@ -101,6 +104,7 @@ def setup(pin, mode, pull_up_down=None, initial=None):
     _pin_setup[pin] = mode
     _pin_values[pin] = initial
 
+
 def output(pin, value):
     """
     Sets the output value for a given GPIO pin.
@@ -116,6 +120,7 @@ def output(pin, value):
         raise RuntimeError("The GPIO channel has not been set up as an OUTPUT")
     print(f"Setting output for pin {pin} to {value}")
     _pin_values[pin] = value
+
 
 def input(pin):
     """
@@ -135,6 +140,7 @@ def input(pin):
     print(f"Reading from pin {pin}")
     return _pin_values.get(pin, LOW)
 
+
 def cleanup(pin=None):
     """
     Cleans up the specified pin or all pins if no pin is specified.
@@ -151,6 +157,7 @@ def cleanup(pin=None):
         _pin_setup.clear()
         _pin_values.clear()
 
+
 def add_event_detect(pin, edge, callback=None, bouncetime=None):
     """
     Add an event detection for a GPIO pin.
@@ -165,6 +172,7 @@ def add_event_detect(pin, edge, callback=None, bouncetime=None):
         print(f"Adding event detect for pin {pin} on edge {edge} with callback")
         _event_callbacks[pin] = callback
 
+
 def remove_event_detect(pin):
     """
     Removes the event detection for a given pin.
@@ -177,6 +185,7 @@ def remove_event_detect(pin):
     """
     print(f"Removing event detect for pin {pin}")
     _event_callbacks.pop(pin, None)
+
 
 # PWM class for mocking PWM functions
 class PWM:

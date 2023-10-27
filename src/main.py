@@ -14,7 +14,7 @@ try:
     while True:
         # Read sensor value
         sensor_value = GPIO.input(SENSOR_PIN)
-        
+
         # Do something with the sensor value
         print(f"Sensor value: {sensor_value}")
 
