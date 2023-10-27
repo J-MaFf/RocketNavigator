@@ -1,3 +1,5 @@
+# Using a mock package because RPiGPIO is not available on Windows.
+
 import mock as GPIO
 import time
 
