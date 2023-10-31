@@ -51,15 +51,18 @@ jobs:
           git symbolic-ref HEAD refs/heads/${{ github.head_ref }}
           git reset
 
+      - name: Commit files if pull request
+        if: github.event_name == 'pull_request'
+        run: |
+          git add -u
+          git diff --cached --quiet || git commit -m "Apply Black formatting"
+          git push --set-upstream origin $(git symbolic-ref --short HEAD)
+
       - name: Commit files
         run: |
           git add -u
           git diff --cached --quiet || git commit -m "Apply Black formatting"
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git push --set-upstream origin $(git symbolic-ref --short HEAD)
-          else
-            git push
-          fi
+          git push
 
   build:
     # Name the Job
