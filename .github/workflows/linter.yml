@@ -47,10 +47,11 @@ jobs:
 
       - name: Checkout to the branch
         if: github.head_ref != ''
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           git fetch origin
-          git checkout ${{ github.head_ref }}
-
+          git checkout $HEAD_REF
       - name: Commit files if pull request
         if: github.event_name == 'pull_request'
         run: |
