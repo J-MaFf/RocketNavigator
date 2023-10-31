@@ -48,6 +48,7 @@ jobs:
       - name: Checkout to the branch
         if: github.head_ref != ''
         run: |
+          git fetch origin
           git symbolic-ref HEAD refs/heads/${{ github.head_ref }}
           git reset
 
