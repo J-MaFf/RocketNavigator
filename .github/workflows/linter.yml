@@ -55,7 +55,11 @@ jobs:
         run: |
           git add -u
           git diff --cached --quiet || git commit -m "Apply Black formatting"
-          git push
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git push --set-upstream origin $(git symbolic-ref --short HEAD)
+          else
+            git push
+          fi
 
   build:
     # Name the Job
