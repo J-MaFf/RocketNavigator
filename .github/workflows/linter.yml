@@ -45,6 +45,11 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
+      - name: Checkout to the branch
+        run: |
+          git symbolic-ref HEAD refs/heads/${{ github.head_ref }}
+          git reset
+
       - name: Commit files
         run: |
           git add -u
