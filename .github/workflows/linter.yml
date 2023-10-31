@@ -46,6 +46,7 @@ jobs:
           git config user.email "actions@github.com"
 
       - name: Checkout to the branch
+        if: github.head_ref != ''
         run: |
           git symbolic-ref HEAD refs/heads/${{ github.head_ref }}
           git reset
