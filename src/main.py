@@ -1,6 +1,4 @@
-# Using a mock package because RPiGPIO is not available on Windows.
-
-import mock as GPIO
+import RPi.GPIO as GPIO
 import time
 
 # Set the GPIO mode
