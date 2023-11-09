@@ -4,6 +4,7 @@
 
 import RPi.GPIO as GPIO
 
+
 class RocketModel:
     def __init__(self):
         # Set up the GPIO using the BCM (Broadcom SOC channel) numbering
