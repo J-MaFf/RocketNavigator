@@ -3,17 +3,18 @@ class RocketController:
     """
     The RocketController class is responsible for updating the view with sensor data from the model.
     """
-    def __init__(self, model, view):
-            """
-            Initializes the Controller class with a model and view object.
 
-            Args:
-                model: An instance of the Model class.
-                view: An instance of the View class.
-            """
-            self.model = model
-            self.view = view
-        
+    def __init__(self, model, view):
+        """
+        Initializes the Controller class with a model and view object.
+
+        Args:
+            model: An instance of the Model class.
+            view: An instance of the View class.
+        """
+        self.model = model
+        self.view = view
+
     def update_view(self):
         """
         Updates the view with the latest sensor data from the model.

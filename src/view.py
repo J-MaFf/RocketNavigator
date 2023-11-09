@@ -1,4 +1,5 @@
-# The View will be how you present the information to the user. 
+# The View will be how you present the information to the user.
+
 
 class RocketView:
     def display_data(self, data):
