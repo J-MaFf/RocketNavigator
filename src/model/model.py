@@ -6,12 +6,15 @@ import RPi.GPIO as GPIO
 
 
 class RocketModel:
-    def __init__(self):
+    sensors = {}
+    def __init__(self, sensors):
         # Set up the GPIO using the BCM (Broadcom SOC channel) numbering
         GPIO.setmode(GPIO.BCM)
         # Set up your sensor pins and initialize them
         # For example, if you have a sensor on BCM pin 23
         GPIO.setup(23, GPIO.IN)
+
+        this.sensors = sensors
 
     def get_sensor_data(self):
         # Read from the sensor
@@ -21,15 +24,56 @@ class RocketModel:
 
 
 class SensorModel:
-    def __init__(self):
-        # Set up the GPIO using the BCM (Broadcom SOC channel) numbering
-        GPIO.setmode(GPIO.BCM)
+    def __init__(self, pin):
+
+        self.pin = pin
+
         # Set up your sensor pins and initialize them
         # For example, if you have a sensor on BCM pin 23
-        GPIO.setup(23, GPIO.IN)
+        GPIO.setup(pin, GPIO.IN)
 
-    def get_sensor_data(self):
+    def readData(self):
+        # Generic method to read data from the sensor
+        return GPIO.input(self.pin)
+
+class TemperatureModel(SensorModel):
+    def __init__(self, pin):
+        super().__init__(pin)
+
+    def readData(self):
         # Read from the sensor
-        sensor_value = GPIO.input(23)
+        sensor_value = GPIO.input(self.pin)
         # Return the sensor data
         return sensor_value
+    
+class PressureModel(SensorModel):
+    def __init__(self, pin):
+        super().__init__(pin)
+
+    def readData(self):
+        # Read from the sensor
+        sensor_value = GPIO.input(self.pin)
+        # Return the sensor data
+        return sensor_value
+    
+class AccelerometerModel(SensorModel):
+    def __init__(self, pin):
+        super().__init__(pin)
+
+    def readData(self):
+        # Read from the sensor
+        sensor_value = GPIO.input(self.pin)
+        # Return the sensor data
+        return sensor_value
+    
+class GyroscopeModel(SensorModel):
+    def __init__(self, pin):
+        super().__init__(pin)
+
+    def readData(self):
+        # Read from the sensor
+        sensor_value = GPIO.input(self.pin)
+        # Return the sensor data
+        return sensor_value
+
+
