@@ -92,7 +92,7 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
+        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
 
 class PressureModel(SensorModel):
@@ -127,7 +127,7 @@ class PressureModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return self.convertData(sensorValue)
-    
+
     def convertData(sensorValue):
         """
         Converts the given sensor value to a pressure in Pascals.
@@ -138,8 +138,9 @@ class PressureModel(SensorModel):
         Returns:
             float: The pressure in Pascals.
         """
-        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
-    
+        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
+
+
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.
@@ -169,7 +170,7 @@ class AccelerometerModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return self.convertData(sensorValue)
-    
+
     def convertData(sensorValue):
         """
         Converts the given sensor value to an acceleration in meters per second squared.
@@ -180,8 +181,9 @@ class AccelerometerModel(SensorModel):
         Returns:
             float: The acceleration in meters per second squared.
         """
-        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
-    
+        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
+
+
 class GyroscopeModel(SensorModel):
     """
     A class representing a gyroscope sensor model.
@@ -211,7 +213,7 @@ class GyroscopeModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return sensorValue
-    
+
     def convertData(sensorValue):
         """
         Converts the given sensor value to a rotation in degrees per second.
@@ -222,4 +224,4 @@ class GyroscopeModel(SensorModel):
         Returns:
             float: The rotation in degrees per second.
         """
-        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
+        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
