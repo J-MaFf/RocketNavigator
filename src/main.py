@@ -1,7 +1,7 @@
 # Import custom classes
-from model import RocketModel
-from view import RocketView
-from controller import RocketController
+from model.model import RocketModel
+from view.view import RocketView
+from controller.controller import RocketController
 
 # This conditional makes sure your code only runs when the script is executed directly
 # and not when it's imported as a module in another script.
