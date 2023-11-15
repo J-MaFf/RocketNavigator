@@ -34,22 +34,29 @@ class SensorModel:
         Reads data from the sensor and returns it.
     """
 
-    class Model:
-        def __init__(self, pin):
-            """
-            Initializes a new instance of the Model class.
+    def __init__(self, pin):
+        """
+        Initializes a new instance of the Model class.
 
-            Args:
-                pin (int): The BCM pin number to which the sensor is connected.
-            """
+        Args:
+            pin (int): The BCM pin number to which the sensor is connected.
+        """
 
-            self.pin = pin
+        self.pin = pin
 
-            # Set up your sensor pins and initialize them
-            # For example, if you have a sensor on BCM pin 23
-            GPIO.setup(pin, GPIO.IN)
+        # Set up your sensor pins and initialize them
+        # For example, if you have a sensor on BCM pin 23
+        GPIO.setup(pin, GPIO.IN)
 
     def readData(self):
+        """
+        Reads data from the sensor connected to the specified GPIO pin.
+
+        Returns:
+        --------
+        int:
+            The value read from the sensor.
+        """
         # Generic method to read data from the sensor
         return GPIO.input(self.pin)
 
@@ -102,25 +109,24 @@ class PressureModel(SensorModel):
         readData(): Reads data from the pressure sensor and returns it.
     """
 
-    class Model(ParentClass):
-        def __init__(self, pin):
-            """
-            Initializes the Model object with the specified pin.
+    def __init__(self, pin):
+        """
+        Initializes the Model object with the specified pin.
 
-            Args:
-                pin (int): The pin number to use for the Model object.
-            """
-            super().__init__(pin)
+        Args:
+            pin (int): The pin number to use for the Model object.
+        """
+        super().__init__(pin)
 
     def readData(self):
         """
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
-            Returns:
-                int: The sensor value read from the GPIO pin.
-            """
-            sensorValue = GPIO.input(self.pin)
-            return sensorValue
+        Returns:
+            int: The sensor value read from the GPIO pin.
+        """
+        sensorValue = GPIO.input(self.pin)
+        return sensorValue
     
 class AccelerometerModel(SensorModel):
     """
@@ -133,25 +139,24 @@ class AccelerometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    class Model(ParentClass):
-        def __init__(self, pin):
-            """
-            Initializes the Model object with the specified pin.
+    def __init__(self, pin):
+        """
+        Initializes the Model object with the specified pin.
 
-            Args:
-                pin (int): The pin number to use for the Model object.
-            """
-            super().__init__(pin)
+        Args:
+            pin (int): The pin number to use for the Model object.
+        """
+        super().__init__(pin)
 
     def readData(self):
         """
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
-            Returns:
-                int: The sensor value read from the GPIO pin.
-            """
-            sensorValue = GPIO.input(self.pin)
-            return sensorValue
+        Returns:
+            int: The sensor value read from the GPIO pin.
+        """
+        sensorValue = GPIO.input(self.pin)
+        return sensorValue
     
 class GyroscopeModel(SensorModel):
     """
@@ -164,15 +169,14 @@ class GyroscopeModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    class Model(ParentClass):
-        def __init__(self, pin):
-            """
-            Initializes the Model class with a given pin.
+    def __init__(self, pin):
+        """
+        Initializes the Model class with a given pin.
 
-            Args:
-                pin (int): The pin number to be used for initialization.
-            """
-            super().__init__(pin)
+        Args:
+            pin (int): The pin number to be used for initialization.
+        """
+        super().__init__(pin)
 
     def readData(self):
         """
