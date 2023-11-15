@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 
 class RocketModel:
     sensors = {}
+
     def __init__(self, sensors):
         # Set up the GPIO using the BCM (Broadcom SOC channel) numbering
         GPIO.setmode(GPIO.BCM)
@@ -25,7 +26,6 @@ class RocketModel:
 
 class SensorModel:
     def __init__(self, pin):
-
         self.pin = pin
 
         # Set up your sensor pins and initialize them
@@ -36,6 +36,7 @@ class SensorModel:
         # Generic method to read data from the sensor
         return GPIO.input(self.pin)
 
+
 class TemperatureModel(SensorModel):
     def __init__(self, pin):
         super().__init__(pin)
@@ -45,7 +46,8 @@ class TemperatureModel(SensorModel):
         sensor_value = GPIO.input(self.pin)
         # Return the sensor data
         return sensor_value
-    
+
+
 class PressureModel(SensorModel):
     def __init__(self, pin):
         super().__init__(pin)
@@ -55,7 +57,8 @@ class PressureModel(SensorModel):
         sensor_value = GPIO.input(self.pin)
         # Return the sensor data
         return sensor_value
-    
+
+
 class AccelerometerModel(SensorModel):
     def __init__(self, pin):
         super().__init__(pin)
@@ -65,7 +68,8 @@ class AccelerometerModel(SensorModel):
         sensor_value = GPIO.input(self.pin)
         # Return the sensor data
         return sensor_value
-    
+
+
 class GyroscopeModel(SensorModel):
     def __init__(self, pin):
         super().__init__(pin)
@@ -75,5 +79,3 @@ class GyroscopeModel(SensorModel):
         sensor_value = GPIO.input(self.pin)
         # Return the sensor data
         return sensor_value
-
-
