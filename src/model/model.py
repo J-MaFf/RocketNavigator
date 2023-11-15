@@ -127,7 +127,8 @@ class PressureModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return sensorValue
-    
+
+
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.
@@ -157,7 +158,8 @@ class AccelerometerModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return sensorValue
-    
+
+
 class GyroscopeModel(SensorModel):
     """
     A class representing a gyroscope sensor model.
