@@ -11,9 +11,9 @@ class RocketModel:
 
     def readData(self):
         # Read from the sensor
-        sensor_value = GPIO.input(23)
+        sensorValue = GPIO.input(23)
         # Return the sensor data
-        return sensor_value
+        return sensorValue
 
 
 class SensorModel:
@@ -117,8 +117,8 @@ class PressureModel(SensorModel):
             Returns:
                 int: The sensor value read from the GPIO pin.
             """
-            sensor_value = GPIO.input(self.pin)
-            return sensor_value
+            sensorValue = GPIO.input(self.pin)
+            return sensorValue
     
 class AccelerometerModel(SensorModel):
     """
@@ -148,8 +148,8 @@ class AccelerometerModel(SensorModel):
             Returns:
                 int: The sensor value read from the GPIO pin.
             """
-            sensor_value = GPIO.input(self.pin)
-            return sensor_value
+            sensorValue = GPIO.input(self.pin)
+            return sensorValue
     
 class GyroscopeModel(SensorModel):
     """
@@ -178,5 +178,5 @@ class GyroscopeModel(SensorModel):
         Returns:
             int: The sensor value.
         """
-        sensor_value = GPIO.input(self.pin)
-        return sensor_value
+        sensorValue = GPIO.input(self.pin)
+        return sensorValue
