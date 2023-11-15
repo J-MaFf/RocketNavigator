@@ -1,7 +1,7 @@
 # Import custom classes
-from model import RocketModel
-from view import RocketView
-from controller import RocketController
+from model.model import RocketModel
+from view.view import RocketView
+from controller.controller import RocketController
 
 # This conditional makes sure your code only runs when the script is executed directly
 # and not when it's imported as a module in another script.
@@ -33,3 +33,6 @@ if __name__ == "__main__":
         # This block allows the user to stop the loop with a keyboard interrupt (Ctrl+C).
         print("Shutting down the rocket controller.")
         # Here you could also add any necessary clean-up code to safely terminate the application.
+        # change more stuff
+        # Bob
+        # test Again
