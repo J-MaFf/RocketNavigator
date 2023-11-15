@@ -19,6 +19,7 @@ class RocketModel:
         # Return the sensor data
         return sensor_value
 
+
 class SensorModel:
     def __init__(self):
         # Set up the GPIO using the BCM (Broadcom SOC channel) numbering
