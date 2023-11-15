@@ -141,7 +141,6 @@ class PressureModel(SensorModel):
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
 
-
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.
@@ -183,7 +182,6 @@ class AccelerometerModel(SensorModel):
             float: The acceleration in meters per second squared.
         """
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
-
 
 
 class GyroscopeModel(SensorModel):
