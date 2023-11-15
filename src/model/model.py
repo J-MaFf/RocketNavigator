@@ -52,6 +52,7 @@ class SensorModel:
         # Generic method to read data from the sensor
         return GPIO.input(self.pin)
 
+
 class TemperatureModel(SensorModel):
     """
     A class representing a temperature sensor model.
@@ -179,5 +180,3 @@ class GyroscopeModel(SensorModel):
         """
         sensor_value = GPIO.input(self.pin)
         return sensor_value
-
-
