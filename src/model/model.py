@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 class RocketModel:
     def __init__(self, sensors):
-        self.sensors = sensors     
+        self.sensors = sensors
 
     def readData(self):
         # Read from the sensor
@@ -33,6 +33,7 @@ class SensorModel:
     readData(self):
         Reads data from the sensor and returns it.
     """
+
     class Model:
         def __init__(self, pin):
             """
@@ -52,6 +53,7 @@ class SensorModel:
         # Generic method to read data from the sensor
         return GPIO.input(self.pin)
 
+
 class TemperatureModel(SensorModel):
     """
     A class representing a temperature sensor model.
@@ -59,6 +61,7 @@ class TemperatureModel(SensorModel):
     Attributes:
         pin (int): The GPIO pin number to which the sensor is connected.
     """
+
     def __init__(self, pin):
         super().__init__(pin)
 
@@ -71,7 +74,7 @@ class TemperatureModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return convertData(sensorValue)
-    
+
     def convertData(sensorValue):
         """
         Converts the given sensor value to a temperature in Fahrenheit.
@@ -83,8 +86,8 @@ class TemperatureModel(SensorModel):
             float: The temperature in Fahrenheit.
         """
         return sensorValue * 1.8 + 32
-        
-    
+
+
 class PressureModel(SensorModel):
     """
     A class representing a pressure sensor model.
@@ -110,15 +113,16 @@ class PressureModel(SensorModel):
             super().__init__(pin)
 
     def readData(self):
-            """
-            Reads data from the sensor connected to the GPIO pin and returns the sensor value.
+        """
+        Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
-            Returns:
-                int: The sensor value read from the GPIO pin.
-            """
-            sensor_value = GPIO.input(self.pin)
-            return sensor_value
-    
+        Returns:
+            int: The sensor value read from the GPIO pin.
+        """
+        sensor_value = GPIO.input(self.pin)
+        return sensor_value
+
+
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.
@@ -141,15 +145,16 @@ class AccelerometerModel(SensorModel):
             super().__init__(pin)
 
     def readData(self):
-            """
-            Reads data from the sensor connected to the GPIO pin and returns the sensor value.
+        """
+        Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
-            Returns:
-                int: The sensor value read from the GPIO pin.
-            """
-            sensor_value = GPIO.input(self.pin)
-            return sensor_value
-    
+        Returns:
+            int: The sensor value read from the GPIO pin.
+        """
+        sensor_value = GPIO.input(self.pin)
+        return sensor_value
+
+
 class GyroscopeModel(SensorModel):
     """
     A class representing a gyroscope sensor model.
@@ -160,6 +165,7 @@ class GyroscopeModel(SensorModel):
     Attributes:
         pin (int): The GPIO pin number to which the sensor is connected.
     """
+
     class Model(ParentClass):
         def __init__(self, pin):
             """
@@ -179,5 +185,3 @@ class GyroscopeModel(SensorModel):
         """
         sensor_value = GPIO.input(self.pin)
         return sensor_value
-
-
