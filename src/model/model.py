@@ -80,7 +80,7 @@ class TemperatureModel(SensorModel):
             float: The temperature in Fahrenheit.
         """
         sensorValue = GPIO.input(self.pin)
-        return convertData(sensorValue)
+        return self.convertData(sensorValue)
 
     def convertData(sensorValue):
         """
@@ -92,7 +92,7 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        return sensorValue * 1.8 + 32
+        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
 
 
 class PressureModel(SensorModel):
@@ -126,7 +126,19 @@ class PressureModel(SensorModel):
             int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
-        return sensorValue
+        return self.convertData(sensorValue)
+    
+    def convertData(sensorValue):
+        """
+        Converts the given sensor value to a pressure in Pascals.
+
+        Args:
+            sensorValue (float): The sensor value to convert.
+
+        Returns:
+            float: The pressure in Pascals.
+        """
+        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
     
 class AccelerometerModel(SensorModel):
     """
@@ -156,7 +168,19 @@ class AccelerometerModel(SensorModel):
             int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
-        return sensorValue
+        return self.convertData(sensorValue)
+    
+    def convertData(sensorValue):
+        """
+        Converts the given sensor value to an acceleration in meters per second squared.
+
+        Args:
+            sensorValue (float): The sensor value to convert.
+
+        Returns:
+            float: The acceleration in meters per second squared.
+        """
+        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
     
 class GyroscopeModel(SensorModel):
     """
@@ -187,3 +211,15 @@ class GyroscopeModel(SensorModel):
         """
         sensorValue = GPIO.input(self.pin)
         return sensorValue
+    
+    def convertData(sensorValue):
+        """
+        Converts the given sensor value to a rotation in degrees per second.
+
+        Args:
+            sensorValue (float): The sensor value to convert.
+
+        Returns:
+            float: The rotation in degrees per second.
+        """
+        return sensorValue * 1.8 + 32 #CHECK CONVERSION FORMULA
