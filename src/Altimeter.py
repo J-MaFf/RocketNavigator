@@ -1,23 +1,27 @@
 import board
 import adafruit_bmp3xx
-#https://docs.circuitpython.org/projects/bmp3xx/en/latest/api.html#adafruit_bmp3xx.BMP3XX.altitude
+
+# https://docs.circuitpython.org/projects/bmp3xx/en/latest/api.html#adafruit_bmp3xx.BMP3XX.altitude
+
 
 def getTempt():
-  temperature = bmp.temperature
-  pressure = bmp.pressure
-  altitude = bmp.altitude
-  return temperature
+    temperature = bmp.temperature
+    pressure = bmp.pressure
+    altitude = bmp.altitude
+    return temperature
+
 
 def getPres():
-  pressure = bmp.pressure
-  return pressure
+    pressure = bmp.pressure
+    return pressure
+
 
 def getAltit():
-  altitude = bmp.altitude
-  return altitude
+    altitude = bmp.altitude
+    return altitude
 
 
-i2c = board.I2C()  
+i2c = board.I2C()
 bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
 temperature = bmp.temperature
 pressure = bmp.pressure
