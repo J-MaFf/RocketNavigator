@@ -27,4 +27,4 @@ def reads():
     return getLat(), getLong()
 
 
-locate = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
+nav = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
