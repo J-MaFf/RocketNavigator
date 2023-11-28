@@ -9,17 +9,20 @@ def getTempt():
     pressure = bmp.pressure
     altitude = bmp.altitude
     return temperature
-
+#float
 
 def getPres():
     pressure = bmp.pressure
     return pressure
-
+#float
 
 def getAltit():
     altitude = bmp.altitude
     return altitude
+#float
 
+def reads():
+    return getTempt(), getPres(), getAltit()
 
 i2c = board.I2C()
 bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
