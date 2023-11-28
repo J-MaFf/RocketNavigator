@@ -4,6 +4,7 @@ import time
 
 # https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
 
+
 def read_temp_raw():
     f = open(device_file, "r")
     lines = f.readlines()
@@ -23,8 +24,10 @@ def read_temp():
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_f
 
+
 def update():
     return read_temp()
+
 
 os.system("modprobe w1-gpio")
 os.system("modprobe w1-therm")
