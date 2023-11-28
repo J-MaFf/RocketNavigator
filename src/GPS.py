@@ -6,14 +6,17 @@ import gnss
 
 def getLat():
     return format(nav.latitude)
-
+#String
 
 def getLong():
     return format(nav.longitude)
-
+#String
 
 def getUpdate():
     nav.update()
 
+def reads():
+    getUpdate()
+    return getLat(), getLong()
 
 locate = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
