@@ -4,14 +4,6 @@ import time
 
 # https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
 
-os.system("modprobe w1-gpio")
-os.system("modprobe w1-therm")
-
-base_dir = "/sys/bus/w1/devices/"
-device_folder = glob.glob(base_dir + "28*")[0]
-device_file = device_folder + "/w1_slave"
-
-
 def read_temp_raw():
     f = open(device_file, "r")
     lines = f.readlines()
@@ -30,3 +22,13 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_f
+
+def update():
+    return read_temp()
+
+os.system("modprobe w1-gpio")
+os.system("modprobe w1-therm")
+
+base_dir = "/sys/bus/w1/devices/"
+device_folder = glob.glob(base_dir + "28*")[0]
+device_file = device_folder + "/w1_slave"
