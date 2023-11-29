@@ -12,6 +12,7 @@ import digitalio
 import busio
 import adafruit_lis3dh
 
+
 class RocketModel:
     def __init__(self, sensors):
         self.sensors = sensors
@@ -119,7 +120,7 @@ class Altimeter(SensorModel):
     def __init__(self, pin):
         """
         Initializes the Model object with the specified pin.
-    
+
         Args:
             pin (int): The pin number to use for the Model object.
         """
