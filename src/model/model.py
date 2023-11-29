@@ -3,7 +3,14 @@
 # know how the data is displayed or what's done with it.
 
 import RPi.GPIO as GPIO
-
+import adafruit_bmp3xx
+import board
+import gnss
+import time
+import board
+import digitalio
+import busio
+import adafruit_lis3dh
 
 class RocketModel:
     def __init__(self, sensors):
@@ -95,12 +102,12 @@ class TemperatureModel(SensorModel):
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
 
-class PressureModel(SensorModel):
+class Altimeter(SensorModel):
     """
     A class representing a pressure sensor model.
 
     Args:
-        pin (int): The GPIO pin number to which the sensor is connected.
+        pin (int): The GPIO pin number to which   the sensor is connected.
 
     Attributes:
         pin (int): The GPIO pin number to which the sensor is connected.
@@ -112,11 +119,13 @@ class PressureModel(SensorModel):
     def __init__(self, pin):
         """
         Initializes the Model object with the specified pin.
-
+    
         Args:
             pin (int): The pin number to use for the Model object.
         """
         super().__init__(pin)
+        i2c = board.I2C()
+        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
 
     def readData(self):
         """
@@ -126,7 +135,11 @@ class PressureModel(SensorModel):
             int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
-        return self.convertData(sensorValue)
+        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        temperature = bmp.temperature
+        pressure = bmp.pressure
+        altitude = bmp.altitude
+        return temperature, pressure, altitude
 
     def convertData(sensorValue):
         """
@@ -160,6 +173,9 @@ class AccelerometerModel(SensorModel):
             pin (int): The pin number to use for the Model object.
         """
         super().__init__(pin)
+        i2c = busio.I2C(board.SCL, board.SDA)
+        int1 = digitalio.DigitalInOut(board.D24)
+        lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
     def readData(self):
         """
@@ -169,7 +185,8 @@ class AccelerometerModel(SensorModel):
             int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
-        return self.convertData(sensorValue)
+        x, y, z = lis3dh.acceleration
+        return x, y, z
 
     def convertData(sensorValue):
         """
@@ -184,7 +201,7 @@ class AccelerometerModel(SensorModel):
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
 
-class GyroscopeModel(SensorModel):
+class GPS(SensorModel):
     """
     A class representing a gyroscope sensor model.
 
@@ -202,6 +219,7 @@ class GyroscopeModel(SensorModel):
         Args:
             pin (int): The pin number to be used for initialization.
         """
+        nav = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
         super().__init__(pin)
 
     def readData(self):
@@ -212,7 +230,10 @@ class GyroscopeModel(SensorModel):
             int: The sensor value.
         """
         sensorValue = GPIO.input(self.pin)
-        return sensorValue
+        nav = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
+        nav.update()
+
+        return format(nav.latitude), format(nav.longitude)
 
     def convertData(sensorValue):
         """
