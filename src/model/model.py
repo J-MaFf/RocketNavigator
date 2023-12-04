@@ -254,7 +254,7 @@ class GPS(SensorModel):
         """
         data = gps.readline()
         message = data[0:6]
-        if (message == "$GPRMC"):
+        if message == "$GPRMC":
             parts = data.split(",")
         else:
             longitude = parts[5]
