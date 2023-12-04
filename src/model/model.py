@@ -2,6 +2,8 @@
 # You'd have classes that read sensor data, interpret it, and perhaps store it. These classes wouldn't
 # know how the data is displayed or what's done with it.
 
+import glob
+import os
 import RPi.GPIO as GPIO
 import adafruit_bmp3xx
 import board
@@ -78,7 +80,7 @@ class TemperatureModel(SensorModel):
 
     def __init__(self, pin):
         super().__init__(pin)
-        os.system("modprobe w1-gpio")
+        os.system("modprobe w1-gpio") # what are these
         os.system("modprobe w1-therm")
 
         base_dir = "/sys/bus/w1/devices/"
@@ -92,16 +94,10 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        sensorValue = GPIO.input(self.pin)
-        return self.convertData()
+        sensorValue = GPIO.input(self.pin) # I dont think this is needed as one wire protocol is used
+        return self.convertData(self.device_file)
 
-    def read_temp_raw():
-        f = open(device_file, "r")
-        lines = f.readlines()
-        f.close()
-        return lines
-
-    def convertData(sensorValue):
+    def convertData(self, device_file):
         """
         Converts the given sensor value to a temperature in Fahrenheit.
 
@@ -111,10 +107,10 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        lines = read_temp_raw()
+        lines = self.read_temp_raw(device_file)
         while lines[0].strip()[-3:] != "YES":
             time.sleep(0.2)
-            lines = read_temp_raw()
+            lines = self.read_temp_raw(device_file)
         equals_pos = lines[1].find("t=")
         if equals_pos != -1:
             temp_string = lines[1][equals_pos + 2 :]
@@ -122,6 +118,22 @@ class TemperatureModel(SensorModel):
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             return temp_f
         # return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
+
+    def read_temp_raw(device_file):
+        """
+        Read the raw temperature data from the device file.
+
+        Args:
+            device_file (str): The path to the device file.
+
+        Returns:
+            list: A list of strings representing the lines read from the file.
+        """
+        f = open(device_file, "r")
+        lines = f.readlines()
+        f.close()
+        return lines
+
 
 
 class Altimeter(SensorModel):
@@ -187,7 +199,7 @@ class AccelerometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin, clkPin):
         """
         Initializes the Model object with the specified pin.
 
@@ -195,6 +207,7 @@ class AccelerometerModel(SensorModel):
             pin (int): The pin number to use for the Model object.
         """
         super().__init__(pin)
+        self.clkPin = clkPin
         i2c = busio.I2C(board.SCL, board.SDA)
         int1 = digitalio.DigitalInOut(board.D24)
         lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
@@ -223,7 +236,7 @@ class AccelerometerModel(SensorModel):
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
 
-class GPS(SensorModel):
+class GPSModel(SensorModel):
     """
     https://gpsd.gitlab.io/gpsd/gpsd_json.html
     A class representing a gyroscope sensor model.
