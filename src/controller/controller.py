@@ -1,5 +1,7 @@
 # This is the middleman between your Model and View. It will control the flow of data and handle user input.
 import RPi.GPIO as GPIO
+
+
 class RocketController:
     """
     The RocketController class is responsible for updating the view with sensor data from the model.
@@ -31,7 +33,6 @@ class RocketController:
             list: A list of pins connected to sensors.
         """
         connected_sensors = []
-    
 
         GPIO.setmode(GPIO.BCM)
 
