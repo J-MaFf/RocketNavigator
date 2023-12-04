@@ -31,8 +31,6 @@ class RocketController:
         # Create sensor objects
         self.createSensors(sensorPinList)
 
-        
-
     def createSensors(self, sensorPinList):
         """
         Creates a list of SensorModel objects from a list of pins.
@@ -47,15 +45,18 @@ class RocketController:
         i = 0
         # Create Temperature Sensor object
         TemperatureSensor = TemperatureModel(sensorPinList[i])
-        i+=1
+        i += 1
         # Create Accelerometer Sensor object
-        AccelerometerSensor1 = AccelerometerModel(sensorPinList[i], sensorPinList[i+1])
-        i+=2
-        AccelerometerSensor2 = AccelerometerModel(sensorPinList[i], sensorPinList[i+1])
-        i+=2
+        AccelerometerSensor1 = AccelerometerModel(
+            sensorPinList[i], sensorPinList[i + 1]
+        )
+        i += 2
+        AccelerometerSensor2 = AccelerometerModel(
+            sensorPinList[i], sensorPinList[i + 1]
+        )
+        i += 2
         # Create Barometer Sensor object
 
-        
     def update_view(self):
         """
         Updates the view with the latest sensor data from the model.
@@ -75,7 +76,11 @@ class RocketController:
 
         GPIO.setmode(GPIO.BCM)
 
-        for pin in pinList: # TODO: Check to see if all sensors output HIGH when connected, or this won't work
+        for (
+            pin
+        ) in (
+            pinList
+        ):  # TODO: Check to see if all sensors output HIGH when connected, or this won't work
             GPIO.setup(pin, GPIO.IN)
             if GPIO.input(pin):
                 connected_sensors.append(pin)

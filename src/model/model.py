@@ -80,7 +80,7 @@ class TemperatureModel(SensorModel):
 
     def __init__(self, pin):
         super().__init__(pin)
-        os.system("modprobe w1-gpio") # what are these
+        os.system("modprobe w1-gpio")  # what are these
         os.system("modprobe w1-therm")
 
         base_dir = "/sys/bus/w1/devices/"
@@ -94,7 +94,9 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        sensorValue = GPIO.input(self.pin) # I dont think this is needed as one wire protocol is used
+        sensorValue = GPIO.input(
+            self.pin
+        )  # I dont think this is needed as one wire protocol is used
         return self.convertData(self.device_file)
 
     def convertData(self, device_file):
@@ -133,7 +135,6 @@ class TemperatureModel(SensorModel):
         lines = f.readlines()
         f.close()
         return lines
-
 
 
 class Altimeter(SensorModel):
