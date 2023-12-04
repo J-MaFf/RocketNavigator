@@ -5,7 +5,6 @@
 import RPi.GPIO as GPIO
 import adafruit_bmp3xx
 import board
-import gnss
 import time
 import board
 import digitalio
@@ -226,6 +225,7 @@ class AccelerometerModel(SensorModel):
 
 class GPS(SensorModel):
     """
+    https://gpsd.gitlab.io/gpsd/gpsd_json.html
     A class representing a gyroscope sensor model.
 
     Args:
@@ -242,8 +242,8 @@ class GPS(SensorModel):
         Args:
             pin (int): The pin number to be used for initialization.
         """
-        nav = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
         super().__init__(pin)
+        gps = serial.Serial(SERIAL_PORT)
 
     def readData(self):
         """
@@ -252,11 +252,14 @@ class GPS(SensorModel):
         Returns:
             int: The sensor value.
         """
-        sensorValue = GPIO.input(self.pin)
-        nav = gnss.GNSS([gnss.SatelliteSystem.GPS, gnss.SatelliteSystem.GLONASS])
-        nav.update()
-
-        return format(nav.latitude), format(nav.longitude)
+        data = gps.readline()
+        message = data[0:6]
+        if (message == "$GPRMC"):
+            parts = data.split(",")
+        else:
+            longitude = parts[5]
+            latitude = parts[3]
+            return longitude, latitude
 
     def convertData(sensorValue):
         """
