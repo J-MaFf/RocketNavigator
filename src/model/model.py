@@ -288,6 +288,7 @@ class GPSModel(SensorModel):
         """
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
+
 class GyroModel(SensorModel):
     """
     https://docs.circuitpython.org/projects/l3gd20/en/latest/api.html#adafruit_l3gd20.L3GD20.gyro
@@ -331,4 +332,4 @@ class GyroModel(SensorModel):
         Returns:
             float: The rotation in degrees per second.
         """
-        return sensorValue # CHECK CONVERSION FORMULA
+        return sensorValue  # CHECK CONVERSION FORMULA
