@@ -12,6 +12,7 @@ import board
 import digitalio
 import busio
 import adafruit_lis3dh
+import adafruit_l3gd20
 
 
 class RocketModel:
@@ -167,7 +168,7 @@ class Altimeter(SensorModel):
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
         Returns:
-            int: The sensor value read from the GPIO pin.
+            array float: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
         bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
@@ -218,7 +219,7 @@ class AccelerometerModel(SensorModel):
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
         Returns:
-            int: The sensor value read from the GPIO pin.
+            array int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
         x, y, z = lis3dh.acceleration
@@ -264,7 +265,7 @@ class GPSModel(SensorModel):
         Reads the sensor data and returns the sensor value.
 
         Returns:
-            int: The sensor value.
+            array float: The sensor value.
         """
         data = gps.readline()
         message = data[0:6]
@@ -286,3 +287,49 @@ class GPSModel(SensorModel):
             float: The rotation in degrees per second.
         """
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
+
+
+class GyroModel(SensorModel):
+    """
+    https://docs.circuitpython.org/projects/l3gd20/en/latest/api.html#adafruit_l3gd20.L3GD20.gyro
+    A class representing a gyroscope sensor model.
+
+    Args:
+        pin (int): The GPIO pin number to which the sensor is connected.
+
+    Attributes:
+        pin (int): The GPIO pin number to which the sensor is connected.
+    """
+
+    def __init__(self, pin):
+        """
+        Initializes the Model class with a given pin.
+
+        Args:
+            pin (int): The pin number to be used for initialization.
+        """
+        super().__init__(pin)
+        i2c = board.I2C()
+        sensorGy = adafruit_l3gd20.L3GD20_I2C(i2c)
+
+    def readData(self):
+        """
+        Reads the sensor data and returns the sensor value.
+
+        Returns:
+            array float: The sensor value.
+        """
+        gyro_data = sensorGy.gyro
+        return gyro_data
+
+    def convertData(sensorValue):
+        """
+        Converts the given sensor value to a rotation in degrees per second.
+
+        Args:
+            sensorValue (float): The sensor value to convert.
+
+        Returns:
+            float: The rotation in degrees per second.
+        """
+        return sensorValue  # CHECK CONVERSION FORMULA
