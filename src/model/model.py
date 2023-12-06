@@ -82,7 +82,7 @@ class TemperatureModel(SensorModel):
     def __init__(self, pin):
         super().__init__(pin)
         os.system("modprobe w1-gpio")  # what are these
-        os.system("modprobe w1-therm") # Might not be needed
+        os.system("modprobe w1-therm")  # Might not be needed
 
         base_dir = "/sys/bus/w1/devices/"
         device_folder = glob.glob(base_dir + "28*")[0]
