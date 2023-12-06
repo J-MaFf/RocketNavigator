@@ -168,7 +168,7 @@ class Altimeter(SensorModel):
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
         Returns:
-            int: The sensor value read from the GPIO pin.
+            array float: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
         bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
@@ -219,7 +219,7 @@ class AccelerometerModel(SensorModel):
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
         Returns:
-            int: The sensor value read from the GPIO pin.
+            array int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
         x, y, z = lis3dh.acceleration
@@ -265,7 +265,7 @@ class GPSModel(SensorModel):
         Reads the sensor data and returns the sensor value.
 
         Returns:
-            int: The sensor value.
+            array float: The sensor value.
         """
         data = gps.readline()
         message = data[0:6]
@@ -317,10 +317,10 @@ class GyroModel(SensorModel):
         Reads the sensor data and returns the sensor value.
 
         Returns:
-            int: The sensor value.
+            array float: The sensor value.
         """
         gyro_data = sensorGy.gyro
-        return gyro_data.gyro_raw
+        return gyro_data
 
     def convertData(sensorValue):
         """
