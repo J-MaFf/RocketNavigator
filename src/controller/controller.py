@@ -61,13 +61,19 @@ class RocketController:
         BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
         i += 2
 
-        #Return list of sensor objects
-        return [TemperatureSensor, AccelerometerSensor1, AccelerometerSensor2, BarometerSensor1, BarometerSensor2]
+        # Return list of sensor objects
+        return [
+            TemperatureSensor,
+            AccelerometerSensor1,
+            AccelerometerSensor2,
+            BarometerSensor1,
+            BarometerSensor2,
+        ]
 
     def update_view(self):
         """
         Updates the view with the latest sensor data from the model.
-        
+
         """
         for sensor in self.sensorObjectList:
             data = sensor.readData()
