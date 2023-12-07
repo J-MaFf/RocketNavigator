@@ -4,8 +4,6 @@ from view.view import RocketView
 from controller.controller import RocketController
 import csv
 
-csv_file_name = "data.csv"
-
 # This conditional makes sure your code only runs when the script is executed directly
 # and not when it's imported as a module in another script.
 if __name__ == "__main__":
