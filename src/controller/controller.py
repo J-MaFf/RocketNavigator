@@ -60,8 +60,6 @@ class RocketController:
         i += 2
         BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
         i += 2
-        
-
 
     def update_view(self):
         """

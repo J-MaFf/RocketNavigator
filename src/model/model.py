@@ -84,7 +84,7 @@ class TemperatureModel(SensorModel):
         os.system("modprobe w1-therm")  # Might not be needed
 
         base_dir = "/sys/bus/w1/devices/"
-        device_folder = glob.glob(base_dir + "28*")[0] # 28 should be pin number
+        device_folder = glob.glob(base_dir + "28*")[0]  # 28 should be pin number
         # This needs to be changed to have a device folder for all the sensors
         device_file = device_folder + "/w1_slave"
 
@@ -98,7 +98,7 @@ class TemperatureModel(SensorModel):
         sensorValue = GPIO.input(
             self.pin
         )  # I dont think this is needed as one wire protocol is used
-        
+
         return self.convertData(self.device_file)
 
     def convertData(self, device_file):
@@ -177,6 +177,8 @@ class Altimeter(SensorModel):
         pressure = bmp.pressure
         altitude = bmp.altitude
         return temperature, pressure, altitude
+
+
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.
@@ -275,8 +277,9 @@ class GPSModel(SensorModel):
         """
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
-#TODO: Finish barometer model
-class BarometerModel (SensorModel):
+
+# TODO: Finish barometer model
+class BarometerModel(SensorModel):
     """
     A class representing a barometer sensor model.
 
