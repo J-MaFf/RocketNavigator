@@ -15,6 +15,6 @@ class RocketView:
     def write_data(self, data):
         with open(csv_file_name, mode=w) as file:
             if isinstance(data, str):
-                file.write(data + ',')
+                file.write(data + ",")
             elif isinstance(data, list):
-                 file.write(", ".join(data))
+                file.write(", ".join(data))
