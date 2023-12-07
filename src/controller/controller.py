@@ -29,7 +29,7 @@ class RocketController:
         """
         sensorPinList = self.check_sensors([7, 5, 3, 16, 15, 13, 11, 22, 21])
         # Create sensor objects
-        self.createSensors(sensorPinList)
+        self.sensorObjectList = self.createSensors(sensorPinList)
 
     def createSensors(self, sensorPinList):
         """
@@ -61,12 +61,17 @@ class RocketController:
         BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
         i += 2
 
+        #Return list of sensor objects
+        return [TemperatureSensor, AccelerometerSensor1, AccelerometerSensor2, BarometerSensor1, BarometerSensor2]
+
     def update_view(self):
         """
         Updates the view with the latest sensor data from the model.
+        
         """
-        data = self.model.readData()
-        self.view.display_data(data)
+        for sensor in self.sensorObjectList:
+            data = sensor.readData()
+            self.view.display_data(data)
 
     def check_sensors(self, pinList):
         """
