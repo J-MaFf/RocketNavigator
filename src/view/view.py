@@ -10,5 +10,5 @@ class RocketView:
 
     # TODO: Add a method to wirte the data to a csv file
     def write_data(self, data):
-        with open(csv_file_name, mode = w) as file:
+        with open(csv_file_name, mode=w) as file:
             writer = file.write(data + ", ")
