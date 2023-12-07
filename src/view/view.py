@@ -1,4 +1,5 @@
 # The View will be how you present the information to the user.
+csv_file_name = "data.csv"
 
 
 class RocketView:
@@ -9,4 +10,5 @@ class RocketView:
 
     # TODO: Add a method to wirte the data to a csv file
     def write_data(self, data):
-        pass
+        with open(csv_file_name, mode = w) as file:
+            writer = file.write(data + ", ")
