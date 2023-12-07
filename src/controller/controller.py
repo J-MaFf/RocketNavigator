@@ -44,7 +44,7 @@ class RocketController:
         # TODO: Create a list of SensorModel objects
         i = 0
         # Create Temperature Sensor object
-        TemperatureSensor = TemperatureModel(sensorPinList[i])
+        TemperatureSensor = TemperatureModel(sensorPinList[i], addresses)
         i += 1
         # Create Accelerometer Sensor object
         AccelerometerSensor1 = AccelerometerModel(
@@ -56,6 +56,12 @@ class RocketController:
         )
         i += 2
         # Create Barometer Sensor object
+        BarometerSensor1 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
+        i += 2
+        BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
+        i += 2
+        
+
 
     def update_view(self):
         """

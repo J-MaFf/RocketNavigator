@@ -12,7 +12,6 @@ import board
 import digitalio
 import busio
 import adafruit_lis3dh
-import adafruit_l3gd20
 
 
 class RocketModel:
@@ -79,13 +78,14 @@ class TemperatureModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin):
+    def __init__(self, pin, addresses):
         super().__init__(pin)
         os.system("modprobe w1-gpio")  # what are these
         os.system("modprobe w1-therm")  # Might not be needed
 
         base_dir = "/sys/bus/w1/devices/"
-        device_folder = glob.glob(base_dir + "28*")[0]
+        device_folder = glob.glob(base_dir + "28*")[0] # 28 should be pin number
+        # This needs to be changed to have a device folder for all the sensors
         device_file = device_folder + "/w1_slave"
 
     def readData(self):
@@ -98,6 +98,7 @@ class TemperatureModel(SensorModel):
         sensorValue = GPIO.input(
             self.pin
         )  # I dont think this is needed as one wire protocol is used
+        
         return self.convertData(self.device_file)
 
     def convertData(self, device_file):
@@ -108,7 +109,7 @@ class TemperatureModel(SensorModel):
             sensorValue (float): The sensor value to convert.
 
         Returns:
-            float: The temperature in Fahrenheit.
+            float: The temperature in celcius.
         """
         lines = self.read_temp_raw(device_file)
         while lines[0].strip()[-3:] != "YES":
@@ -119,7 +120,7 @@ class TemperatureModel(SensorModel):
             temp_string = lines[1][equals_pos + 2 :]
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
-            return temp_f
+            return temp_c
         # return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
     def read_temp_raw(device_file):
@@ -168,28 +169,14 @@ class Altimeter(SensorModel):
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
         Returns:
-            array float: The sensor value read from the GPIO pin.
+            int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
         temperature = bmp.temperature
         pressure = bmp.pressure
         altitude = bmp.altitude
         return temperature, pressure, altitude
-
-    def convertData(sensorValue):
-        """
-        Converts the given sensor value to a pressure in Pascals.
-
-        Args:
-            sensorValue (float): The sensor value to convert.
-
-        Returns:
-            float: The pressure in Pascals.
-        """
-        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
-
-
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.
@@ -201,7 +188,7 @@ class AccelerometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin, clkPin):
+    def __init__(self, clkPin, pin):
         """
         Initializes the Model object with the specified pin.
 
@@ -219,7 +206,7 @@ class AccelerometerModel(SensorModel):
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
 
         Returns:
-            array int: The sensor value read from the GPIO pin.
+            int: The sensor value read from the GPIO pin.
         """
         sensorValue = GPIO.input(self.pin)
         x, y, z = lis3dh.acceleration
@@ -265,7 +252,7 @@ class GPSModel(SensorModel):
         Reads the sensor data and returns the sensor value.
 
         Returns:
-            array float: The sensor value.
+            int: The sensor value.
         """
         data = gps.readline()
         message = data[0:6]
@@ -288,11 +275,10 @@ class GPSModel(SensorModel):
         """
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
-
-class GyroModel(SensorModel):
+#TODO: Finish barometer model
+class BarometerModel (SensorModel):
     """
-    https://docs.circuitpython.org/projects/l3gd20/en/latest/api.html#adafruit_l3gd20.L3GD20.gyro
-    A class representing a gyroscope sensor model.
+    A class representing a barometer sensor model.
 
     Args:
         pin (int): The GPIO pin number to which the sensor is connected.
@@ -301,7 +287,7 @@ class GyroModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin):
+    def __init__(self, clkPin, pin):
         """
         Initializes the Model class with a given pin.
 
@@ -309,18 +295,23 @@ class GyroModel(SensorModel):
             pin (int): The pin number to be used for initialization.
         """
         super().__init__(pin)
+        self.clkPin = clkPin
         i2c = board.I2C()
-        sensorGy = adafruit_l3gd20.L3GD20_I2C(i2c)
+        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
 
     def readData(self):
         """
         Reads the sensor data and returns the sensor value.
 
         Returns:
-            array float: The sensor value.
+            int: The sensor value.
         """
-        gyro_data = sensorGy.gyro
-        return gyro_data
+        sensorValue = GPIO.input(self.pin)
+        bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
+        temperature = bmp.temperature
+        pressure = bmp.pressure
+        altitude = bmp.altitude
+        return temperature, pressure, altitude
 
     def convertData(sensorValue):
         """
@@ -332,4 +323,4 @@ class GyroModel(SensorModel):
         Returns:
             float: The rotation in degrees per second.
         """
-        return sensorValue  # CHECK CONVERSION FORMULA
+        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
