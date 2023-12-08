@@ -230,7 +230,7 @@ class AccelerometerModel(SensorModel):
 class GPSModel(SensorModel):
     """
     https://gpsd.gitlab.io/gpsd/gpsd_json.html
-    A class representing a gyroscope sensor model.
+    A class representing a GPS sensor model.
 
     Args:
         pin (int): The GPIO pin number to which the sensor is connected.
@@ -327,3 +327,41 @@ class BarometerModel(SensorModel):
             float: The rotation in degrees per second.
         """
         return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
+
+
+class GyroSensor(SensorModel):
+    """
+    A class representing a Gyro model.
+
+    Args:
+        pin (int): The GPIO pin number to which the sensor is connected.
+
+    Attributes:
+        pin (int): The GPIO pin number to which the sensor is connected.
+    """
+
+    def __init__(self, pin):
+        """
+        Initializes a new instance of the Model class.
+
+        Args:
+            pin (int): The BCM pin number to which the sensor is connected.
+        """
+
+        self.pin = pin
+
+        # Set up your sensor pins and initialize them
+        # For example, if you have a sensor on BCM pin 23
+        GPIO.setup(pin, GPIO.IN)
+
+    def readData(self):
+        """
+        Reads data from the sensor connected to the specified GPIO pin.
+
+        Returns:
+        --------
+        int:
+            The value read from the sensor.
+        """
+        # Generic method to read data from the sensor
+        return GPIO.input(self.pin)
