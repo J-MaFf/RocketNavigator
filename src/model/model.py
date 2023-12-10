@@ -256,6 +256,7 @@ class GPSModel(SensorModel):
             latitude = parts[3]
             return longitude, latitude
 
+
 # TODO: Finish barometer model
 class BarometerModel(SensorModel):
     """
