@@ -217,18 +217,6 @@ class AccelerometerModel(SensorModel):
         x, y, z = lis3dh.acceleration
         return x, y, z
 
-    def convertData(sensorValue):
-        """
-        Converts the given sensor value to an acceleration in meters per second squared.
-
-        Args:
-            sensorValue (float): The sensor value to convert.
-
-        Returns:
-            float: The acceleration in meters per second squared.
-        """
-        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
-
 
 class GPSModel(SensorModel):
     """
@@ -268,19 +256,6 @@ class GPSModel(SensorModel):
             latitude = parts[3]
             return longitude, latitude
 
-    def convertData(sensorValue):
-        """
-        Converts the given sensor value to a rotation in degrees per second.
-
-        Args:
-            sensorValue (float): The sensor value to convert.
-
-        Returns:
-            float: The rotation in degrees per second.
-        """
-        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
-
-
 # TODO: Finish barometer model
 class BarometerModel(SensorModel):
     """
@@ -319,18 +294,6 @@ class BarometerModel(SensorModel):
         altitude = bmp.altitude
         return temperature, pressure, altitude
 
-    def convertData(sensorValue):
-        """
-        Converts the given sensor value to a rotation in degrees per second.
-
-        Args:
-            sensorValue (float): The sensor value to convert.
-
-        Returns:
-            float: The rotation in degrees per second.
-        """
-        return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
-
 
 class GyroSensor(SensorModel):
     """
@@ -357,7 +320,7 @@ class GyroSensor(SensorModel):
         # For example, if you have a sensor on BCM pin 23
         GPIO.setup(pin, GPIO.IN)
         i2c = board.I2C()
-        sensor = adafruit_l3gd20.L3GD20_I2C(i2c)
+        self.sensor = adafruit_l3gd20.L3GD20_I2C(i2c)
 
     def readData(self):
         """
@@ -369,4 +332,5 @@ class GyroSensor(SensorModel):
             The value read from the sensor.
         """
         # Generic method to read data from the sensor
-        return sensor.gyro
+        gyro_data = self.sensor.gyro
+        return gyro_data
