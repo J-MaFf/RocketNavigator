@@ -342,7 +342,7 @@ class GyroSensor(SensorModel):
     Attributes:
         pin (int): The GPIO pin number to which the sensor is connected.
     """
-    
+
     def __init__(self, pin):
         """
         Initializes a new instance of the Model class.
