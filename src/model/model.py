@@ -12,6 +12,7 @@ import board
 import digitalio
 import busio
 import adafruit_lis3dh
+import adafruit_l3gd20
 
 
 class RocketModel:
@@ -341,7 +342,7 @@ class GyroSensor(SensorModel):
     Attributes:
         pin (int): The GPIO pin number to which the sensor is connected.
     """
-
+    
     def __init__(self, pin):
         """
         Initializes a new instance of the Model class.
@@ -355,6 +356,8 @@ class GyroSensor(SensorModel):
         # Set up your sensor pins and initialize them
         # For example, if you have a sensor on BCM pin 23
         GPIO.setup(pin, GPIO.IN)
+        i2c = board.I2C()
+        sensor = adafruit_l3gd20.L3GD20_I2C(i2c)
 
     def readData(self):
         """
@@ -366,4 +369,4 @@ class GyroSensor(SensorModel):
             The value read from the sensor.
         """
         # Generic method to read data from the sensor
-        return GPIO.input(self.pin)
+        return sensor.gyro
