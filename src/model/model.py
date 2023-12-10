@@ -174,11 +174,9 @@ class Altimeter(SensorModel):
         Returns:
             int: The sensor value read from the GPIO pin.
         """
-        sensorValue = GPIO.input(self.pin)
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
-        temperature = bmp.temperature
-        pressure = bmp.pressure
-        altitude = bmp.altitude
+        temperature = self.bmp.temperature
+        pressure = self.bmp.pressure
+        altitude = self.bmp.altitude
         return temperature, pressure, altitude
 
 
