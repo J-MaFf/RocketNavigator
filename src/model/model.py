@@ -84,7 +84,9 @@ class TemperatureModel(SensorModel):
         os.system("modprobe w1-therm")  # Might not be needed
 
         base_dir = "/sys/bus/w1/devices/"
-        device_folder = glob.glob(base_dir + pin + "*")[addresses]  # 28 should be pin number
+        device_folder = glob.glob(base_dir + pin + "*")[
+            addresses
+        ]  # 28 should be pin number
         # This needs to be changed to have a device folder for all the sensors
         device_file = device_folder + "/w1_slave"
 
