@@ -42,17 +42,17 @@ class RocketController:
             list: A list of SensorModel objects.
         """
         # TODO: Create a list of SensorModel objects
-        #print(sensorPinList)
+        # print(sensorPinList)
         i = 0
         # Create Temperature Sensor objects
-        TemperatureSensor1 = TemperatureModel(28, 0)#sensorPinList[i], 0)
-        TemperatureSensor2 = TemperatureModel(28, 1)#sensorPinList[i], 1)
-        TemperatureSensor3 = TemperatureModel(28, 2)#sensorPinList[i], 2)
-        TemperatureSensor4 = TemperatureModel(28, 3)#sensorPinList[i], 3)
+        TemperatureSensor1 = TemperatureModel(28, 0)  # sensorPinList[i], 0)
+        TemperatureSensor2 = TemperatureModel(28, 1)  # sensorPinList[i], 1)
+        TemperatureSensor3 = TemperatureModel(28, 2)  # sensorPinList[i], 2)
+        TemperatureSensor4 = TemperatureModel(28, 3)  # sensorPinList[i], 3)
         i += 1
         # Create Accelerometer Sensor object
         AccelerometerSensor1 = AccelerometerModel(
-            #sensorPinList[i], sensorPinList[i + 1]
+            # sensorPinList[i], sensorPinList[i + 1]
         )
         """
         i += 2
@@ -73,11 +73,11 @@ class RocketController:
             TemperatureSensor3,
             TemperatureSensor4,
             AccelerometerSensor1
-            #AccelerometerSensor2,
-            #BarometerSensor1,
-            #BarometerSensor2,
+            # AccelerometerSensor2,
+            # BarometerSensor1,
+            # BarometerSensor2,
         ]
-        #print(sensorList)
+        # print(sensorList)
         return sensorList
 
     def update_view(self):
@@ -85,10 +85,10 @@ class RocketController:
         Updates the view with the latest sensor data from the model.
 
         """
-        #print(self.sensorObjectList)
+        # print(self.sensorObjectList)
         data = ""
         for sensor in self.sensorObjectList:
-            #print(sensor, end='')
+            # print(sensor, end='')
             data = data + str(sensor.readData()) + "\t"
         self.view.display_data(data)
 

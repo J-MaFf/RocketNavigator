@@ -11,18 +11,19 @@ import time
 import board
 import digitalio
 import busio
-#import adafruit_lis3dh
+
+# import adafruit_lis3dh
 import adafruit_l3gd20
 import adafruit_adxl34x
 
 
 class RocketModel:
-    def __init__(self):#, sensors):
+    def __init__(self):  # , sensors):
         self.sensors = []
 
     def initSensors(self, sensors):
         self.sensors = sensors
-    
+
     def readData(self):
         # Read from the sensor
         sensorValue = GPIO.input(23)
@@ -89,7 +90,7 @@ class TemperatureModel(SensorModel):
         os.system("modprobe w1-therm")  # Might not be needed
 
         base_dir = "/sys/bus/w1/devices/"
-        #print(pin)
+        # print(pin)
         device_folder = glob.glob(base_dir + str(pin) + "*")[address]
         # 28 should be pin number
         # This needs to be changed to have a device folder for all the sensors
@@ -119,7 +120,7 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in celcius.
         """
-        #print(device_file)
+        # print(device_file)
         lines = self.read_temp_raw(device_file)
         while lines[0].strip()[-3:] != "YES":
             time.sleep(0.2)
@@ -197,7 +198,7 @@ class AccelerometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self):#, clkPin, pin):
+    def __init__(self):  # , clkPin, pin):
         """
         Initializes the Model object with the specified pin.
 
@@ -213,7 +214,7 @@ class AccelerometerModel(SensorModel):
         int1 = digitalio.DigitalInOut(board.D24)
         lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
         """
-        
+
     def readData(self):
         """
         Reads data from the sensor connected to the GPIO pin and returns the sensor value.
