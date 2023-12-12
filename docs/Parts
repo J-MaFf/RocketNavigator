@@ -1,12 +1,15 @@
-Engine: https://www.apogeerockets.com/Rocket_Motors/Rouse-Tech_Casings/29mm_Casings/RMS-29_40-120
+xEngine: https://www.apogeerockets.com/Rocket_Motors/Rouse-Tech_Casings/29mm_Casings/RMS-29_40-120
 Altimeter: https://www.adafruit.com/product/3966
 Accelerometer: https://www.adafruit.com/product/4097
-Temp1: https://www.adafruit.com/product/165
+xTemp1: https://www.adafruit.com/product/165
 Temp2: https://www.adafruit.com/product/374
-Motor1: https://www.amazon.com/Acxico-2-Phase-Ultra-Tiny-Precision-Stepper/dp/B09CTT8Z2G/ref=asc_df_B09CTT8Z2G/?tag=hyprod-20&linkCode=df0&hvadid=647168045727&hvpos=&hvnetw=g&hvrand=9866825144827849480&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9018823&hvtargid=pla-1862306575835&psc=1&gclid=Cj0KCQjwsp6pBhCfARIsAD3GZubL2XILnX6ypW1qfHS7DIirpaELZ1x3QFfPb7LBTMPg8-E5pBL198AaAn7EEALw_wcB
-Top Tube: https://www.apogeerockets.com/Building_Supplies/Body_Tubes/Low_Power_Tubes/66mm_x_18_Body_Tube_Estes_BT-80_size
-Bottom Tube: https://www.apogeerockets.com/Building_Supplies/Body_Tubes/Low_Power_Tubes/56mm_x_18_Body_Tube_Estes_BT-70_size
-GPS1: https://www.adafruit.com/product/746
+xMotor1: https://www.amazon.com/Acxico-2-Phase-Ultra-Tiny-Precision-Stepper/dp/B09CTT8Z2G/ref=asc_df_B09CTT8Z2G/?tag=hyprod-20&linkCode=df0&hvadid=647168045727&hvpos=&hvnetw=g&hvrand=9866825144827849480&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9018823&hvtargid=pla-1862306575835&psc=1&gclid=Cj0KCQjwsp6pBhCfARIsAD3GZubL2XILnX6ypW1qfHS7DIirpaELZ1x3QFfPb7LBTMPg8-E5pBL198AaAn7EEALw_wcB
+xTop Tube: https://www.apogeerockets.com/Building_Supplies/Body_Tubes/Low_Power_Tubes/66mm_x_18_Body_Tube_Estes_BT-80_size
+xBottom Tube: https://www.apogeerockets.com/Building_Supplies/Body_Tubes/Low_Power_Tubes/56mm_x_18_Body_Tube_Estes_BT-70_size
+xGPS1: https://www.adafruit.com/product/746
 GPS2: https://www.adafruit.com/product/2460
-Camera1: https://www.adafruit.com/product/1937
-Camera2: https://www.adafruit.com/product/5658
+xCamera1: https://www.adafruit.com/product/1937
+xCamera2: https://www.adafruit.com/product/5658
+adafru.it/3882
+adafru.it/711
+https://www.adafruit.com/product/1032
