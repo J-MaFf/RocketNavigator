@@ -156,18 +156,12 @@ class TemperatureModel(SensorModel):
         return lines
 
 
-class Altimeter(SensorModel):
+class ServoModel(SensorModel):
     """
-    A class representing a pressure sensor model.
+    A class representing a servo motor.
 
     Args:
         pin (int): The GPIO pin number to which   the sensor is connected.
-
-    Attributes:
-        pin (int): The GPIO pin number to which the sensor is connected.
-
-    Methods:
-        readData(): Reads data from the pressure sensor and returns it.
     """
 
     def __init__(self, pin):
@@ -178,20 +172,19 @@ class Altimeter(SensorModel):
             pin (int): The pin number to use for the Model object.
         """
         super().__init__(pin)
-        i2c = board.I2C()
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        self.pin = pin
+        GPIO.setup(pin, GPIO.OUT)
+        self.pwm = GPIO.PWM(pin, 50)
+        self.pwm.start(0)
 
-    def readData(self):
+    def setAngle(self, val):
         """
-        Reads data from the sensor connected to the GPIO pin and returns the sensor value.
-
-        Returns:
-            int: The sensor value read from the GPIO pin.
+        Sets the angle of the servo
         """
-        temperature = self.bmp.temperature
-        pressure = self.bmp.pressure
-        altitude = self.bmp.altitude
-        return temperature, pressure, altitude
+        GPIO.output(self.pin, True)
+        self.pwm.ChangeDutyCycle(val)
+        time.sleep(0.2)
+        GPIO.output(self.pin, False)
 
 
 class AccelerometerModel(SensorModel):

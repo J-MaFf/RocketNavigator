@@ -8,6 +8,7 @@ from model.model import (
     SensorModel,
     TemperatureModel,
     GyroModel,
+    ServoModel,
 )
 
 
@@ -38,6 +39,17 @@ class RocketController:
         # Create sensor objects
         # self.sensorObjectList = self.createSensors(sensorPinList)
         self.sensorObjectList = self.createSensors()
+        self.servoObjectList = self.createControllers()
+
+    def createControllers(self):
+        GyroSensor = GyroModel()
+        servo1 = ServoModel(11)
+        servoList = [GyroSensor, servo1]
+        return servoList
+
+    def doControls(self):
+        angle = self.servoObjectList[0].readData()
+        self.servoObjectList[1].setAngle(10)
 
     def createSensors(self):  # , sensorPinList):
         """
