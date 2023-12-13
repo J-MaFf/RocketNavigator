@@ -91,7 +91,7 @@ class RocketController:
                 data.append(point)
             # line return between each sensor
             data.append("\n")
-        self.view.display_data(data)
+        self.view.display_data(self, data)
 
     def check_sensors(self, pinList):
         """
