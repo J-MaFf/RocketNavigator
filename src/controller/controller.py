@@ -85,10 +85,10 @@ class RocketController:
         # print(self.sensorObjectList)
         data = []
         for sensor in self.sensorObjectList:
-            #print(sensor, end="")
+            # print(sensor, end="")
             for point in sensor.readData():
                 data.append(point)
-            #data.append(sensor.readData())
+            # data.append(sensor.readData())
         self.view.display_data(data)
 
     def check_sensors(self, pinList):
