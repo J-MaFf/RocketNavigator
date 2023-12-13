@@ -40,37 +40,37 @@ This requirements report outlines the specifications for the development of a Ro
 
 ### User Groups and Their Needs 
 
- **1. Rocketry Club:** 
+- **1. Rocketry Club:** 
     - The rocketry club needs the system to function reliably, collect accurate data, and provide real-time GPS tracking for monitoring rockets. They also want an easily updatable system for incorporating new sensors. 
   
- **2. Campus Police:** 
+- **2. Campus Police:** 
     - Campus Police want the system to maintain safety during rocket tests and ensure compliance with legal regulations. They are interested in the integration of software with hardware to ensure proper operation. 
   
- **3. Users Receiving GPS Data:** 
+- **3. Users Receiving GPS Data:** 
     - Users receiving GPS data, likely members of the rocketry club, expect continuous and accurate GPS coordinates for real-time tracking, ensuring successful rocket recovery. 
   
 
 ### Non-Functional Requirements and Constraints 
   
- **1. Responsiveness:**
+- **1. Responsiveness:**
     The system must remain responsive throughout the entire rocket flight, ensuring real-time data transmission.
 
- **2. Data Accuracy:**
+- **2. Data Accuracy:**
     Data collected and stored must be accurate, and the system should maintain proper data points to support post-flight analysis.
 
- **3. Continuous GPS Tracking:**
+- **3. Continuous GPS Tracking:**
     The GPS system is critical and must operate without interruptions to avoid rocket loss.
 
- **4. Hardware Compatibility:**
+- **4. Hardware Compatibility:**
     The system should be compatible with various sensors and easily adaptable to accommodate new hardware.
 
- **5. Reliability:**
+- **5. Reliability:**
     The system must be highly reliable to prevent data loss or system failures, as any failure may result in additional launch costs.
 
- **6. Handling Sensor Failures:**
+- **6. Handling Sensor Failures:**
     The system should handle sensor failures gracefully, either by stopping data collection for disconnected sensors or inputting null values.
 
- **7. Updatability:**
+- **7. Updatability:**
     The code should be well-documented and modular, making it easy for future users to add or modify sensors.
 
 
