@@ -283,15 +283,15 @@ class BarometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self):#, clkPin, pin):
+    def __init__(self):  # , clkPin, pin):
         """
         Initializes the Model class with a given pin.
 
         Args:
             pin (int): The pin number to be used for initialization.
         """
-        #super().__init__(pin)
-        #self.clkPin = clkPin
+        # super().__init__(pin)
+        # self.clkPin = clkPin
         i2c = board.I2C()
         bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
         print("test")
