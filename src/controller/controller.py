@@ -1,5 +1,6 @@
 # This is the middleman between your Model and View. It will control the flow of data and handle user input.
 import RPi.GPIO as GPIO
+from datetime import datetime
 
 from model.model import (
     AccelerometerModel,
@@ -86,11 +87,11 @@ class RocketController:
         """
         # print(self.sensorObjectList)
         data = []
+        data.append(datetime.now())
         for sensor in self.sensorObjectList:
             for point in sensor.readData():
                 data.append(point)
             # line return between each sensor
-            data.append("\n")
         self.view.display_data(data)
 
     def check_sensors(self, pinList):

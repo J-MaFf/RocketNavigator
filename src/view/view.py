@@ -6,7 +6,8 @@ class RocketView:
 
     def display_data(self, data):
         # Print the headers
-        print("{:<15} {:<15} {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
+        print(data)
+        print("{:<15} {:<15} \t\t {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
         # Loop through the data and print each item
         sensors = ["Temp1",
                    "Temp2",
@@ -16,9 +17,36 @@ class RocketView:
                    "Barometer",
                    "Gyroscope"]
         i = 0
-        while i < len(data):
-            print(sensors[i], '{0:.2f}'.format(data[i]), end="\n")
+        j = 1
+        while i < 4:
+            print(sensors[i] + "\t\t" + str(data[0]) + "\t",
+                  '{0:.2f}'.format(data[j]), end="\n")
             i+=1
+            j+=1
+        while i < 7:
+            print(sensors[i] + "\t" + str(data[0]) + "\t",
+              '{0:.2f}'.format(data[j]),
+              '\t{0:.2f}'.format(data[j+1]),
+              '\t{0:.2f}'.format(data[j+2]), end="\n")
+            i+=1
+            j+=3
+        """
+        print(sensors[i] + "\t" + str(data[0]),
+              '{0:.2f}'.format(data[j]),
+              '{0:.2f}'.format(data[j+1]),
+              '{0:.2f}'.format(data[j+2]), end="\n")
+        i+=1
+        j+=3
+        print(sensors[i],
+              '{0:.2f}'.format(data[j]),
+              '{0:.2f}'.format(data[j+1]),
+              '{0:.2f}'.format(data[j+2]))
+        i+=1
+        j+=3
+        print(sensors[i],
+              '{0:.2f}'.format(data[j]),
+              '{0:.2f}'.format(data[j+1]),
+              '{0:.2f}'.format(data[j+2]), end="\n")"""
         '''for item in data:
             print(item.sensorType(), "{0:.2f}".format(item), end="\n")
             # print("{:<15} {:<15} {:<15}".format(*item))'''
