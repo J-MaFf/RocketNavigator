@@ -3,9 +3,14 @@ from model.model import RocketModel
 from view.view import RocketView
 from controller.controller import RocketController
 import csv
+import os
 
 # This conditional makes sure your code only runs when the script is executed directly
 # and not when it's imported as a module in another script.
+
+os.system("modprobe w1-gpio")
+os.system("modprobe w1-therm")
+
 if __name__ == "__main__":
     # Create an instance of the Model. This is where you'll manage your sensor data
     # and database interactions.

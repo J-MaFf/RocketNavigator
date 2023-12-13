@@ -42,14 +42,19 @@ class RocketController:
             list: A list of SensorModel objects.
         """
         # TODO: Create a list of SensorModel objects
+        # print(sensorPinList)
         i = 0
-        # Create Temperature Sensor object
-        TemperatureSensor = TemperatureModel(sensorPinList[i], addresses)
+        # Create Temperature Sensor objects
+        TemperatureSensor1 = TemperatureModel(28, 0)  # sensorPinList[i], 0)
+        TemperatureSensor2 = TemperatureModel(28, 1)  # sensorPinList[i], 1)
+        TemperatureSensor3 = TemperatureModel(28, 2)  # sensorPinList[i], 2)
+        TemperatureSensor4 = TemperatureModel(28, 3)  # sensorPinList[i], 3)
         i += 1
         # Create Accelerometer Sensor object
         AccelerometerSensor1 = AccelerometerModel(
-            sensorPinList[i], sensorPinList[i + 1]
+            # sensorPinList[i], sensorPinList[i + 1]
         )
+        """
         i += 2
         AccelerometerSensor2 = AccelerometerModel(
             sensorPinList[i], sensorPinList[i + 1]
@@ -60,24 +65,32 @@ class RocketController:
         i += 2
         BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
         i += 2
-
+        """
         # Return list of sensor objects
-        return [
-            TemperatureSensor,
-            AccelerometerSensor1,
-            AccelerometerSensor2,
-            BarometerSensor1,
-            BarometerSensor2,
+        sensorList = [
+            TemperatureSensor1,
+            TemperatureSensor2,
+            TemperatureSensor3,
+            TemperatureSensor4,
+            AccelerometerSensor1
+            # AccelerometerSensor2,
+            # BarometerSensor1,
+            # BarometerSensor2,
         ]
+        # print(sensorList)
+        return sensorList
 
     def update_view(self):
         """
         Updates the view with the latest sensor data from the model.
 
         """
+        # print(self.sensorObjectList)
+        data = ""
         for sensor in self.sensorObjectList:
-            data = sensor.readData()
-            self.view.display_data(data)
+            # print(sensor, end='')
+            data = data + str(sensor.readData()) + "\t"
+        self.view.display_data(data)
 
     def check_sensors(self, pinList):
         """
