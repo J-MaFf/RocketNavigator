@@ -206,7 +206,8 @@ class AccelerometerModel(SensorModel):
             pin (int): The pin number to use for the Model object.
         """
         i2c = board.I2C()
-        self.accelerometer = adafruit_adxl34x.ADXL343(i2c)
+        address = ""
+        self.accelerometer = adafruit_adxl34x.ADXL343(i2c, address)
         """
         super().__init__(pin)
         self.clkPin = clkPin
