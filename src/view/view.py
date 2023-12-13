@@ -9,7 +9,9 @@ class RocketView:
         print("{:<15} {:<15} {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
         # Loop through the data and print each item
         for item in data:
-            print("{:<15} {:<15} {:<15}".format(*item))
+            print(item, end = "\t")
+            #print("{:<15} {:<15} {:<15}".format(*item))
+        print()
 
     def write_data(self, data):
         with open(self.csv_file_name, mode="w", newline="") as file:

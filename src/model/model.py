@@ -104,7 +104,7 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        return self.convertData(self.sensor)
+        return [self.convertData(self.sensor)]
 
     def convertData(self, device_file):
         """
@@ -219,8 +219,8 @@ class AccelerometerModel(SensorModel):
         Returns:
             int: The sensor value read from the GPIO pin.
         """
-        value = self.accelerometer.acceleration
-        print(value)
+        x, y, z = self.accelerometer.acceleration
+        return [x, y, z]
         """
         sensorValue = GPIO.input(self.pin)
         x, y, z = lis3dh.acceleration
@@ -316,7 +316,7 @@ class GyroSensor(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin):
+    def __init__(self):#, pin):
         """
         Initializes a new instance of the Model class.
 
@@ -324,11 +324,11 @@ class GyroSensor(SensorModel):
             pin (int): The BCM pin number to which the sensor is connected.
         """
 
-        self.pin = pin
+        #self.pin = pin
 
         # Set up your sensor pins and initialize them
         # For example, if you have a sensor on BCM pin 23
-        GPIO.setup(pin, GPIO.IN)
+        #GPIO.setup(pin, GPIO.IN)
         i2c = board.I2C()
         self.sensor = adafruit_l3gd20.L3GD20_I2C(i2c)
 
