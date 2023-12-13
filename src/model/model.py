@@ -305,7 +305,7 @@ class BarometerModel(SensorModel):
         return temperature, pressure, altitude
 
 
-class GyroSensor(SensorModel):
+class GyroModel(SensorModel):
     """
     A class representing a Gyro model.
 
