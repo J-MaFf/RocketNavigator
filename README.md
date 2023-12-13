@@ -77,5 +77,49 @@ This requirements report outlines the specifications for the development of a Ro
 ### Conclusion 
 - This requirements report outlines the key features, user groups, and non-functional requirements for the Rocketry Data Tracking System. The system aims to provide reliable data collection, real-time GPS tracking, and adaptability to new hardware. Meeting the needs and constraints of the stakeholders is crucial for the successful development and deployment of the system. 
 
-DRIVE: https://drive.google.com/drive/folders/1q5S4ulOazxgFTWy_yK3LpxsE7EUC9Ryw?usp=sharing
+
+## Software Testing Documentation
+
+### Overview
+To test our software effectively, we employ various methods. Our primary approach involves integrating our code into a **Raspberry Pi 3** and connecting multiple sensors to it. 
+
+#### Ideal Testing Scenario
+In an ideal scenario, we envision attaching the setup to a rocket for multiple test launches. This will help us:
+- Identify potential errors
+- Assess performance in fast and long-distance environments
+
+However, due to substantial costs, we opt for simpler tests like walking around with the device to ensure successful data collection from all sensors.
+
+#### Database Integration
+Our focus extends to ensuring the software seamlessly interfaces with a database, managing and correctly storing information from sensors, especially under hardware error conditions.
+
+#### Simulating Challenging Scenarios
+To simulate challenging scenarios, we:
+- Intentionally remove sensors during testing
+- Check for potential disconnects, particularly relevant in a rocket environment
+
+#### Virtual Environment Testing
+Since testing on a physical Raspberry Pi demands significant time, we use a virtual environment that mirrors the Raspberry Pi's behavior. This is crucial for running sensor libraries exclusive to the Raspberry Pi.
+
+#### Development and Collaboration
+Our development process involves:
+- Using a server
+- Collaborative work on GitHub
+
+A notable challenge is sensor testing in the virtual environment due to the lack of actual sensor data. We counter this by ensuring software functionality based on documentation, followed by live testing sessions.
+
+### Project Delivery
+For delivery, clients will receive the source code, deployable on multiple Raspberry Pis. Upon initiation, the software:
+- Automatically identifies connected sensors
+- Begins data collection
+- Organizes information into a table for post-testing analysis
+
+
+
+
+
+
+## Drive link
+
+- https://drive.google.com/drive/folders/1q5S4ulOazxgFTWy_yK3LpxsE7EUC9Ryw?usp=sharing
 
