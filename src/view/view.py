@@ -6,7 +6,7 @@ class RocketView:
 
     def display_data(self, data):
         # Print the headers
-        print(data)
+        self.write_data(data)
         print("{:<15} {:<15} \t\t {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
         # Loop through the data and print each item
         sensors = [
@@ -27,9 +27,9 @@ class RocketView:
             j+=1
         while i < 7:
             print(sensors[i] + "\t" + str(data[0]) + "\t",
-              '{0:.2f}'.format(data[j]),
-              '\t{0:.2f}'.format(data[j+1]),
-              '\t{0:.2f}'.format(data[j+2]), end="\n")
+              '{0:.1f}'.format(data[j]),
+              '\t{0:.1f}'.format(data[j+1]),
+              '\t{0:.1f}'.format(data[j+2]), end="\n")
             i+=1
             j+=3
         """
@@ -59,9 +59,7 @@ class RocketView:
         print()
 
     def write_data(self, data):
-        with open(self.csv_file_name, mode="w", newline="") as file:
-            writer = csv.writer(file)
-            # Write the header
-            writer.writerow(["Sensor type", "Timestamp", "Sensor data"])
+        with open(self.csv_file_name, mode="a", newline="") as file:
+            writer = csv.writer(file, delimiter = ',', quoting = csv.QUOTE_MINIMAL)
             # Write the data
-            writer.writerows(data if isinstance(data, list) else [data])
+            writer.writerow(data)

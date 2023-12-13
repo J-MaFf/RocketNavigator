@@ -32,7 +32,7 @@ if __name__ == "__main__":
         while True:
             # This function call tells the controller to update the View with new data.
             controller.update_view()
-            time.sleep(20)
+            time.sleep(10)
             # If your sensors update frequently, you could add a sleep here.
             # For example, time.sleep(1) would pause the loop for 1 second before continuing.
             # This is important to prevent your loop from consuming too much CPU by running as fast as possible.
