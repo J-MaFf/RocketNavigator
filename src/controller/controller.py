@@ -85,7 +85,7 @@ class RocketController:
         # print(self.sensorObjectList)
         data = []
         for sensor in self.sensorObjectList:
-            # print(sensor, end="")
+            data.append(self.sensorType())
             for point in sensor.readData():
                 data.append(point)
             # data.append(sensor.readData())
