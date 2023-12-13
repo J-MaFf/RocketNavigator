@@ -292,8 +292,8 @@ class BarometerModel(SensorModel):
         """
         # super().__init__(pin)
         # self.clkPin = clkPin
-        i2c = board.I2C()
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        self.i2c = board.I2C()
+        self.bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
         print("test")
 
     def readData(self):
@@ -304,7 +304,7 @@ class BarometerModel(SensorModel):
             int: The sensor value.
         """
         #sensorValue = GPIO.input(self.pin)
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
+        
         temperature = bmp.temperature
         pressure = bmp.pressure
         altitude = bmp.altitude
