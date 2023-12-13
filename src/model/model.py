@@ -11,12 +11,17 @@ import time
 import board
 import digitalio
 import busio
-import adafruit_lis3dh
+
+# import adafruit_lis3dh
 import adafruit_l3gd20
+import adafruit_adxl34x
 
 
 class RocketModel:
-    def __init__(self, sensors):
+    def __init__(self):  # , sensors):
+        self.sensors = []
+
+    def initSensors(self, sensors):
         self.sensors = sensors
 
     def readData(self):
@@ -70,6 +75,17 @@ class SensorModel:
         # Generic method to read data from the sensor
         return GPIO.input(self.pin)
 
+    def sensorType(self):
+        """
+        Returns the type of sensor.
+
+        Returns:
+        --------
+        str:
+            The type of sensor.
+        """
+        return self.__class__.__name__
+
 
 class TemperatureModel(SensorModel):
     """
@@ -79,17 +95,18 @@ class TemperatureModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin, addresses):
+    def __init__(self, pin, address):
         super().__init__(pin)
         os.system("modprobe w1-gpio")  # what are these
         os.system("modprobe w1-therm")  # Might not be needed
 
         base_dir = "/sys/bus/w1/devices/"
-        device_folder = glob.glob(base_dir + pin + "*")[
-            addresses
-        ]  # 28 should be pin number
+        # print(pin)
+        device_folder = glob.glob(base_dir + str(pin) + "*")[address]
+        # 28 should be pin number
         # This needs to be changed to have a device folder for all the sensors
         device_file = device_folder + "/w1_slave"
+        self.sensor = device_file
 
     def readData(self):
         """
@@ -98,11 +115,7 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        sensorValue = GPIO.input(
-            self.pin
-        )  # I dont think this is needed as one wire protocol is used
-
-        return self.convertData(self.device_file)
+        return [self.convertData(self.sensor)]
 
     def convertData(self, device_file):
         """
@@ -114,6 +127,7 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in celcius.
         """
+        # print(device_file)
         lines = self.read_temp_raw(device_file)
         while lines[0].strip()[-3:] != "YES":
             time.sleep(0.2)
@@ -126,7 +140,7 @@ class TemperatureModel(SensorModel):
             return temp_c
         # return sensorValue * 1.8 + 32  # CHECK CONVERSION FORMULA
 
-    def read_temp_raw(device_file):
+    def read_temp_raw(self, device_file):
         """
         Read the raw temperature data from the device file.
 
@@ -191,18 +205,23 @@ class AccelerometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, clkPin, pin):
+    def __init__(self):  # , clkPin, pin):
         """
         Initializes the Model object with the specified pin.
 
         Args:
             pin (int): The pin number to use for the Model object.
         """
+        i2c = board.I2C()
+        address = 0x53
+        self.accelerometer = adafruit_adxl34x.ADXL343(i2c, address)
+        """
         super().__init__(pin)
         self.clkPin = clkPin
         i2c = busio.I2C(board.SCL, board.SDA)
         int1 = digitalio.DigitalInOut(board.D24)
         lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
+        """
 
     def readData(self):
         """
@@ -211,9 +230,13 @@ class AccelerometerModel(SensorModel):
         Returns:
             int: The sensor value read from the GPIO pin.
         """
+        x, y, z = self.accelerometer.acceleration
+        return [x, y, z]
+        """
         sensorValue = GPIO.input(self.pin)
         x, y, z = lis3dh.acceleration
         return x, y, z
+        """
 
 
 class GPSModel(SensorModel):
@@ -267,17 +290,18 @@ class BarometerModel(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, clkPin, pin):
+    def __init__(self):  # , clkPin, pin):
         """
         Initializes the Model class with a given pin.
 
         Args:
             pin (int): The pin number to be used for initialization.
         """
-        super().__init__(pin)
-        self.clkPin = clkPin
+        # super().__init__(pin)
+        # self.clkPin = clkPin
         i2c = board.I2C()
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        self.bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        print("test")
 
     def readData(self):
         """
@@ -286,15 +310,13 @@ class BarometerModel(SensorModel):
         Returns:
             int: The sensor value.
         """
-        sensorValue = GPIO.input(self.pin)
-        bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
-        temperature = bmp.temperature
-        pressure = bmp.pressure
-        altitude = bmp.altitude
-        return temperature, pressure, altitude
+        temperature = self.bmp.temperature
+        pressure = self.bmp.pressure
+        altitude = self.bmp.altitude
+        return [temperature, pressure, altitude]
 
 
-class GyroSensor(SensorModel):
+class GyroModel(SensorModel):
     """
     A class representing a Gyro model.
 
@@ -305,7 +327,7 @@ class GyroSensor(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self, pin):
+    def __init__(self):  # , pin):
         """
         Initializes a new instance of the Model class.
 
@@ -313,11 +335,11 @@ class GyroSensor(SensorModel):
             pin (int): The BCM pin number to which the sensor is connected.
         """
 
-        self.pin = pin
+        # self.pin = pin
 
         # Set up your sensor pins and initialize them
         # For example, if you have a sensor on BCM pin 23
-        GPIO.setup(pin, GPIO.IN)
+        # GPIO.setup(pin, GPIO.IN)
         i2c = board.I2C()
         self.sensor = adafruit_l3gd20.L3GD20_I2C(i2c)
 
@@ -331,5 +353,5 @@ class GyroSensor(SensorModel):
             The value read from the sensor.
         """
         # Generic method to read data from the sensor
-        gyro_data = self.sensor.gyro
-        return gyro_data
+        x, y, z = self.sensor.gyro
+        return [x, y, z]

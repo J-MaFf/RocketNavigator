@@ -3,9 +3,15 @@ from model.model import RocketModel
 from view.view import RocketView
 from controller.controller import RocketController
 import csv
+import os
+import time
 
 # This conditional makes sure your code only runs when the script is executed directly
 # and not when it's imported as a module in another script.
+
+os.system("modprobe w1-gpio")
+os.system("modprobe w1-therm")
+
 if __name__ == "__main__":
     # Create an instance of the Model. This is where you'll manage your sensor data
     # and database interactions.
@@ -26,7 +32,7 @@ if __name__ == "__main__":
         while True:
             # This function call tells the controller to update the View with new data.
             controller.update_view()
-
+            time.sleep(10)
             # If your sensors update frequently, you could add a sleep here.
             # For example, time.sleep(1) would pause the loop for 1 second before continuing.
             # This is important to prevent your loop from consuming too much CPU by running as fast as possible.

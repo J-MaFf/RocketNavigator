@@ -1,7 +1,14 @@
 # This is the middleman between your Model and View. It will control the flow of data and handle user input.
 import RPi.GPIO as GPIO
+from datetime import datetime
 
-from model.model import AccelerometerModel, SensorModel, TemperatureModel
+from model.model import (
+    AccelerometerModel,
+    BarometerModel,
+    SensorModel,
+    TemperatureModel,
+    GyroModel,
+)
 
 
 class RocketController:
@@ -27,11 +34,12 @@ class RocketController:
         barometer clock is on pin 13 (gpio2) data line is on pin 11 (gpio0) (bpm338 chip) Hex address 0x77
         barometer 2 clock is on pin 22 (gpio22) data line is on pin 21 (gpio21)
         """
-        sensorPinList = self.check_sensors([7, 5, 3, 16, 15, 13, 11, 22, 21])
+        # sensorPinList = self.check_sensors([7, 5, 3, 16, 15, 13, 11, 22, 21])
         # Create sensor objects
-        self.sensorObjectList = self.createSensors(sensorPinList)
+        # self.sensorObjectList = self.createSensors(sensorPinList)
+        self.sensorObjectList = self.createSensors()
 
-    def createSensors(self, sensorPinList):
+    def createSensors(self):  # , sensorPinList):
         """
         Creates a list of SensorModel objects from a list of pins.
 
@@ -42,42 +50,49 @@ class RocketController:
             list: A list of SensorModel objects.
         """
         # TODO: Create a list of SensorModel objects
-        i = 0
-        # Create Temperature Sensor object
-        TemperatureSensor = TemperatureModel(sensorPinList[i], addresses)
-        i += 1
+        # print(sensorPinList)
+        # Create Temperature Sensor objects
+        TemperatureSensor1 = TemperatureModel(28, 0)  # sensorPinList[i], 0)
+        TemperatureSensor2 = TemperatureModel(28, 1)  # sensorPinList[i], 1)
+        TemperatureSensor3 = TemperatureModel(28, 2)  # sensorPinList[i], 2)
+        TemperatureSensor4 = TemperatureModel(28, 3)  # sensorPinList[i], 3)
         # Create Accelerometer Sensor object
-        AccelerometerSensor1 = AccelerometerModel(
-            sensorPinList[i], sensorPinList[i + 1]
-        )
-        i += 2
-        AccelerometerSensor2 = AccelerometerModel(
-            sensorPinList[i], sensorPinList[i + 1]
-        )
-        i += 2
+        AccelerometerSensor1 = (
+            AccelerometerModel()
+        )  # sensorPinList[i], sensorPinList[i + 1]
         # Create Barometer Sensor object
-        BarometerSensor1 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
-        i += 2
-        BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
-        i += 2
+        BarometerSensor1 = BarometerModel()  # sensorPinList[i], sensorPinList[i + 1])
+        # Create Gyro sensor object
+        GyroSensor = GyroModel()
 
         # Return list of sensor objects
-        return [
-            TemperatureSensor,
+        sensorList = [
+            TemperatureSensor1,
+            TemperatureSensor2,
+            TemperatureSensor3,
+            TemperatureSensor4,
             AccelerometerSensor1,
-            AccelerometerSensor2,
+            # AccelerometerSensor2,
             BarometerSensor1,
-            BarometerSensor2,
+            # BarometerSensor2,
+            GyroSensor,
         ]
+        # print(sensorList)
+        return sensorList
 
     def update_view(self):
         """
         Updates the view with the latest sensor data from the model.
 
         """
+        # print(self.sensorObjectList)
+        data = []
+        data.append(datetime.now())
         for sensor in self.sensorObjectList:
-            data = sensor.readData()
-            self.view.display_data(data)
+            for point in sensor.readData():
+                data.append(point)
+            # line return between each sensor
+        self.view.display_data(data)
 
     def check_sensors(self, pinList):
         """
