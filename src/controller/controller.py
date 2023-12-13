@@ -1,7 +1,7 @@
 # This is the middleman between your Model and View. It will control the flow of data and handle user input.
 import RPi.GPIO as GPIO
 
-from model.model import AccelerometerModel, SensorModel, TemperatureModel
+from model.model import AccelerometerModel, BarometerModel, SensorModel, TemperatureModel
 
 
 class RocketController:
@@ -86,10 +86,10 @@ class RocketController:
         Updates the view with the latest sensor data from the model.
 
         """
-        # print(self.sensorObjectList)
+        #print(self.sensorObjectList)
         data = ""
         for sensor in self.sensorObjectList:
-            # print(sensor, end='')
+            print(sensor, end='')
             data = data + str(sensor.readData()) + "\t"
         self.view.display_data(data)
 
