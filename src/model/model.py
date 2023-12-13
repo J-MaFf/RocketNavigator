@@ -299,8 +299,8 @@ class BarometerModel(SensorModel):
         """
         # super().__init__(pin)
         # self.clkPin = clkPin
-        self.i2c = board.I2C()
-        self.bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
+        i2c = board.I2C()
+        self.bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
         print("test")
 
     def readData(self):
@@ -313,7 +313,7 @@ class BarometerModel(SensorModel):
         temperature = self.bmp.temperature
         pressure = self.bmp.pressure
         altitude = self.bmp.altitude
-        return temperature, pressure, altitude
+        return [temperature, pressure, altitude]
 
 
 class GyroModel(SensorModel):
@@ -353,5 +353,5 @@ class GyroModel(SensorModel):
             The value read from the sensor.
         """
         # Generic method to read data from the sensor
-        gyro_data = self.sensor.gyro
-        return gyro_data
+        x, y, z = self.sensor.gyro
+        return [x, y, z]

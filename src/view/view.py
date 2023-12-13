@@ -8,9 +8,20 @@ class RocketView:
         # Print the headers
         print("{:<15} {:<15} {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
         # Loop through the data and print each item
-        for item in data:
-            print(self.sensorType(), item, end="\t")
-            # print("{:<15} {:<15} {:<15}".format(*item))
+        sensors = ["Temp1",
+                   "Temp2",
+                   "Temp3",
+                   "Temp4",
+                   "Accelerometer",
+                   "Barometer",
+                   "Gyroscope"]
+        i = 0
+        while i < len(data):
+            print(sensors[i], '{0:.2f}'.format(data[i]), end="\n")
+            i+=1
+        '''for item in data:
+            print(item.sensorType(), "{0:.2f}".format(item), end="\n")
+            # print("{:<15} {:<15} {:<15}".format(*item))'''
         print()
 
     def write_data(self, data):
