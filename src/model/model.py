@@ -74,7 +74,7 @@ class SensorModel:
         """
         # Generic method to read data from the sensor
         return GPIO.input(self.pin)
-    
+
     def sensorType(self):
         """
         Returns the type of sensor.
