@@ -303,8 +303,6 @@ class BarometerModel(SensorModel):
         Returns:
             int: The sensor value.
         """
-        #sensorValue = GPIO.input(self.pin)
-        
         temperature = bmp.temperature
         pressure = bmp.pressure
         altitude = bmp.altitude
