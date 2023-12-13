@@ -75,7 +75,8 @@ This requirements report outlines the specifications for the development of a Ro
 
 
 ### Conclusion 
-- This requirements report outlines the key features, user groups, and non-functional requirements for the Rocketry Data Tracking System. The system aims to provide reliable data collection, real-time GPS tracking, and adaptability to new hardware. Meeting the needs and constraints of the stakeholders is crucial for the successful development and deployment of the system.  return
+- This requirements report outlines the key features, user groups, and non-functional requirements for the Rocketry Data Tracking System. The system aims to provide reliable data collection, real-time GPS tracking, and adaptability to new hardware. Meeting the needs and constraints of the stakeholders is crucial for the successful development and deployment of the system.
+
 ---
 
 ## Software Testing Documentation
@@ -115,10 +116,7 @@ For delivery, clients will receive the source code, deployable on multiple Raspb
 - Organizes information into a table for post-testing analysis
 
 
-
-
-
-
+***
 ## Drive link
 
 - https://drive.google.com/drive/folders/1q5S4ulOazxgFTWy_yK3LpxsE7EUC9Ryw?usp=sharing
