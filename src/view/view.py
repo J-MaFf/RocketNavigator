@@ -9,8 +9,8 @@ class RocketView:
         print("{:<15} {:<15} {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
         # Loop through the data and print each item
         for item in data:
-            print(self.sensorType() ,item, end = "\t")
-            #print("{:<15} {:<15} {:<15}".format(*item))
+            print(self.sensorType(), item, end="\t")
+            # print("{:<15} {:<15} {:<15}".format(*item))
         print()
 
     def write_data(self, data):
