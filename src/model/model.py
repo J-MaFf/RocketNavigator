@@ -104,10 +104,6 @@ class TemperatureModel(SensorModel):
         Returns:
             float: The temperature in Fahrenheit.
         """
-        sensorValue = GPIO.input(
-            self.pin
-        )  # I dont think this is needed as one wire protocol is used
-
         return self.convertData(self.sensor)
 
     def convertData(self, device_file):
