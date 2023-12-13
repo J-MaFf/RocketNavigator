@@ -290,7 +290,7 @@ class BarometerModel(SensorModel):
         Args:
             pin (int): The pin number to be used for initialization.
         """
-        #super().__init__(pin)
+        # super().__init__(pin)
         # self.clkPin = clkPin
         self.i2c = board.I2C()
         self.bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
