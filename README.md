@@ -26,16 +26,16 @@ This requirements report outlines the specifications for the development of a Ro
 
 ### Scenarios:
 
- **Scenario 1:** Data Collection and Storage 
-- Rocketry club launches a rocket. 
-- Sensors collect data during the flight. 
-- Data is transmitted to the Raspberry Pi. 
-- The system stores the data in a database. 
+- **Scenario 1:** Data Collection and Storage 
+    - Rocketry club launches a rocket. 
+    - Sensors collect data during the flight. 
+    - Data is transmitted to the Raspberry Pi. 
+    - The system stores the data in a database. 
   
- **Scenario 2:** Real-time GPS Tracking 
-- The system continuously transmits GPS coordinates during a rocket's flight. 
-- Users receive GPS data for real-time monitoring. 
-- The rocketry club ensures successful rocket recovery based on GPS information. 
+- **Scenario 2:** Real-time GPS Tracking 
+    - The system continuously transmits GPS coordinates during a rocket's flight. 
+    - Users receive GPS data for real-time monitoring. 
+    - The rocketry club ensures successful rocket recovery based on GPS information. 
   
 
 ### User Groups and Their Needs 
@@ -75,7 +75,7 @@ This requirements report outlines the specifications for the development of a Ro
 
 
 ### Conclusion 
-    This requirements report outlines the key features, user groups, and non-functional requirements for the Rocketry Data Tracking System. The system aims to provide reliable data collection, real-time GPS tracking, and adaptability to new hardware. Meeting the needs and constraints of the stakeholders is crucial for the successful development and deployment of the system. 
+- This requirements report outlines the key features, user groups, and non-functional requirements for the Rocketry Data Tracking System. The system aims to provide reliable data collection, real-time GPS tracking, and adaptability to new hardware. Meeting the needs and constraints of the stakeholders is crucial for the successful development and deployment of the system. 
 
 DRIVE: https://drive.google.com/drive/folders/1q5S4ulOazxgFTWy_yK3LpxsE7EUC9Ryw?usp=sharing
 
