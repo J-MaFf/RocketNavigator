@@ -1,21 +1,19 @@
-# The View will be how you present the information to the user.
-csv_file_name = "data.csv"
-
+import csv
 
 class RocketView:
-    # TODO: Add a method to display the data
-    def display_data(self, data):
-        # Print the data or update the display
-        if isinstance(data, list):
-            print(", ".join(data))
-        else:
-            print(data)
+    csv_file_name = "data.csv"
 
-    # TODO: Add a method to wirte the data to a csv file
+    def display_data(self, data):
+        # Print the headers
+        print("{:<15} {:<15} {:<15}".format('Sensor type', 'Timestamp', 'Sensor data'))
+        # Loop through the data and print each item
+        for item in data:
+            print("{:<15} {:<15} {:<15}".format(*item))
+
     def write_data(self, data):
-        with open(csv_file_name, mode=w) as file:
-            # Adds data to file
-            if isinstance(data, list):
-                file.write(", ".join(data))
-            else:
-                file.write(data + ",")
+        with open(self.csv_file_name, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            # Write the header
+            writer.writerow(['Sensor type', 'Timestamp', 'Sensor data'])
+            # Write the data
+            writer.writerows(data if isinstance(data, list) else [data])
