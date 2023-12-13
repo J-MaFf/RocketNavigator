@@ -303,7 +303,7 @@ class BarometerModel(SensorModel):
         Returns:
             int: The sensor value.
         """
-        sensorValue = GPIO.input(self.pin)
+        #sensorValue = GPIO.input(self.pin)
         bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
         temperature = bmp.temperature
         pressure = bmp.pressure

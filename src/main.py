@@ -15,15 +15,15 @@ if __name__ == "__main__":
     # Create an instance of the Model. This is where you'll manage your sensor data
     # and database interactions.
     model = RocketModel()
-
+    
     # Create an instance of the View. The View is responsible for presenting data to the user.
     # Since you only need console output, this can start as simple print statements.
     view = RocketView()
-
+    
     # Create an instance of the Controller, passing in the model and view.
     # The Controller will handle user inputs and update the View based on data from the Model.
     controller = RocketController(model, view)
-
+    
     # You might want to have a loop here for continuous updates.
     # If you need to perform tasks at a set interval, you can use a time.sleep() call.
     # If the script is meant to run indefinitely, consider handling exit conditions properly.
@@ -39,3 +39,9 @@ if __name__ == "__main__":
         # This block allows the user to stop the loop with a keyboard interrupt (Ctrl+C).
         print("Shutting down the rocket controller.")
         # Here you could also add any necessary clean-up code to safely terminate the application.
+        
+        
+        
+        
+        
+        
