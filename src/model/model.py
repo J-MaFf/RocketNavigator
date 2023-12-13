@@ -316,7 +316,7 @@ class GyroSensor(SensorModel):
         pin (int): The GPIO pin number to which the sensor is connected.
     """
 
-    def __init__(self):#, pin):
+    def __init__(self):  # , pin):
         """
         Initializes a new instance of the Model class.
 
@@ -324,11 +324,11 @@ class GyroSensor(SensorModel):
             pin (int): The BCM pin number to which the sensor is connected.
         """
 
-        #self.pin = pin
+        # self.pin = pin
 
         # Set up your sensor pins and initialize them
         # For example, if you have a sensor on BCM pin 23
-        #GPIO.setup(pin, GPIO.IN)
+        # GPIO.setup(pin, GPIO.IN)
         i2c = board.I2C()
         self.sensor = adafruit_l3gd20.L3GD20_I2C(i2c)
 
