@@ -5,6 +5,7 @@ class RocketView:
     csv_file_name = "data.csv"
 
     def display_data(self, data):
+        sensorType = self.sensorType()
         # Print the headers
         print("{:<15} {:<15} {:<15}".format("Sensor type", "Timestamp", "Sensor data"))
         # Loop through the data and print each item
