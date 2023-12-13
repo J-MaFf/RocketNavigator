@@ -50,20 +50,20 @@ class RocketController:
         TemperatureSensor3 = TemperatureModel(28, 2)  # sensorPinList[i], 2)
         TemperatureSensor4 = TemperatureModel(28, 3)  # sensorPinList[i], 3)
         i += 1
+        """
         # Create Accelerometer Sensor object
         AccelerometerSensor1 = AccelerometerModel(
             # sensorPinList[i], sensorPinList[i + 1]
         )
-        """
         i += 2
         AccelerometerSensor2 = AccelerometerModel(
             sensorPinList[i], sensorPinList[i + 1]
-        )
+        )"""
         i += 2
         # Create Barometer Sensor object
-        BarometerSensor1 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
+        BarometerSensor1 = BarometerModel()#sensorPinList[i], sensorPinList[i + 1])
         i += 2
-        BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
+        """BarometerSensor2 = SensorModel(sensorPinList[i], sensorPinList[i + 1])
         i += 2
         """
         # Return list of sensor objects
