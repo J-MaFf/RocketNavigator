@@ -27,12 +27,12 @@ class RocketController:
         barometer clock is on pin 13 (gpio2) data line is on pin 11 (gpio0) (bpm338 chip) Hex address 0x77
         barometer 2 clock is on pin 22 (gpio22) data line is on pin 21 (gpio21)
         """
-        #sensorPinList = self.check_sensors([7, 5, 3, 16, 15, 13, 11, 22, 21])
+        # sensorPinList = self.check_sensors([7, 5, 3, 16, 15, 13, 11, 22, 21])
         # Create sensor objects
-        #self.sensorObjectList = self.createSensors(sensorPinList)
+        # self.sensorObjectList = self.createSensors(sensorPinList)
         self.sensorObjectList = self.createSensors()
 
-    def createSensors(self):#, sensorPinList):
+    def createSensors(self):  # , sensorPinList):
         """
         Creates a list of SensorModel objects from a list of pins.
 
