@@ -6,7 +6,7 @@ from model.model import (
     BarometerModel,
     SensorModel,
     TemperatureModel,
-    GyroModel
+    GyroModel,
 )
 
 
@@ -56,12 +56,14 @@ class RocketController:
         TemperatureSensor3 = TemperatureModel(28, 2)  # sensorPinList[i], 2)
         TemperatureSensor4 = TemperatureModel(28, 3)  # sensorPinList[i], 3)
         # Create Accelerometer Sensor object
-        AccelerometerSensor1 = AccelerometerModel()# sensorPinList[i], sensorPinList[i + 1]
+        AccelerometerSensor1 = (
+            AccelerometerModel()
+        )  # sensorPinList[i], sensorPinList[i + 1]
         # Create Barometer Sensor object
         BarometerSensor1 = BarometerModel()  # sensorPinList[i], sensorPinList[i + 1])
         # Create Gyro sensor object
         GyroSensor = GyroModel()
-        
+
         # Return list of sensor objects
         sensorList = [
             TemperatureSensor1,
@@ -72,7 +74,7 @@ class RocketController:
             # AccelerometerSensor2,
             BarometerSensor1,
             # BarometerSensor2,
-            GyroSensor
+            GyroSensor,
         ]
         # print(sensorList)
         return sensorList
