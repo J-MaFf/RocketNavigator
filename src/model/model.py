@@ -186,6 +186,7 @@ class ServoModel(SensorModel):
         time.sleep(0.2)
         GPIO.output(self.pin, False)
 
+
 class AccelerometerModel(SensorModel):
     """
     A class representing an accelerometer sensor model.

@@ -36,7 +36,7 @@ if __name__ == "__main__":
             while i > 0:
                 controller.doControls()
                 time.sleep(0.1)
-                i-=1
+                i -= 1
             # If your sensors update frequently, you could add a sleep here.
             # For example, time.sleep(1) would pause the loop for 1 second before continuing.
             # This is important to prevent your loop from consuming too much CPU by running as fast as possible.
