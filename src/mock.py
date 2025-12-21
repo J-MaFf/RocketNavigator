@@ -1,4 +1,4 @@
-""" 
+"""
 Mock RPi.GPIO Library
 
 ## `mock.py` module
