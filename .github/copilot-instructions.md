@@ -53,3 +53,21 @@ Always ensure the following metadata is set on every PR:
 - **Labels**: Assign relevant labels (e.g., `enhancement`, `bug`, `documentation`, `refactor`, `testing`)
 - **Assignees**: Assign to yourself (J-MaFf)
 - **Issues**: Link all related issues in the PR description and GitHub's linked issues feature
+
+**Using GitHub CLI to set metadata:**
+
+```bash
+# Add a single label
+gh issue edit <PR_NUMBER> --add-label "documentation"
+
+# Add multiple labels
+gh issue edit <PR_NUMBER> --add-label "documentation" --add-label "enhancement"
+
+# Assign to yourself
+gh issue edit <PR_NUMBER> --add-assignee <USERNAME>
+
+# Complete metadata setup example (add labels and assignee)
+gh issue edit 84 --add-label "documentation" --add-assignee "J-MaFf"
+```
+
+Note: Use `gh issue edit` for both issues and pull requests. Replace `<PR_NUMBER>` with the PR number and `<USERNAME>` with the GitHub username. Labels must exist in the repository; check available labels with `gh label list`.
