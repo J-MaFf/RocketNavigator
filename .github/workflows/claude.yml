@@ -33,6 +33,20 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Load git-policies into CLAUDE.md
+        run: |
+          url="https://raw.githubusercontent.com/J-MaFf/J-MaFf.github.io/main/claude/git-policies.md"
+          if curl -fsSL "$url" -o /tmp/git-policies.md; then
+            {
+              printf '\n<!-- BEGIN git-policies (fetched at runtime from %s) -->\n' "$url"
+              cat /tmp/git-policies.md
+              printf '\n<!-- END git-policies -->\n'
+            } >> CLAUDE.md
+            echo "Loaded git-policies into CLAUDE.md ($(wc -l < /tmp/git-policies.md) lines)."
+          else
+            echo "::warning::Could not fetch git-policies from $url; proceeding without it."
+          fi
+
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
         with:
