@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "RocketNavigator",
+  "project_id": "394be66c-aa21-44b6-ba70-12ea92894607"
+}
